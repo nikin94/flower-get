@@ -1,29 +1,17 @@
 <?php
-// error_reporting(E_ALL);
+ error_reporting(E_ALL);
+require_once('assets/DB/DataBaseConnection.php');
+$dbClass = new DataBaseConnection();
 
 ?>
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Цветы</title>
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="assets/css/style.css">
+<?php require_once("assets/templates/head_config.php")?>
 </head>
 <body>
-<header>
-    <nav>
-        <ul>
-            <li><a href="">Список заказов</a></li>
-            <li><a href="">Добавить новый заказ</a></li>
-        </ul>
-    </nav>
-</header>
-
+<?php require_once("assets/templates/header.php")?>
+<?php require_once("orders-list.php");?>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="assets/js/script.js"></script>
 </body>
