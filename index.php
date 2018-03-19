@@ -2,6 +2,7 @@
  error_reporting(E_ALL);
 require_once('assets/DB/DataBaseConnection.php');
 $dbClass = new DataBaseConnection();
+require_once('functions.php');
 
 ?>
 <!doctype html>

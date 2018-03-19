@@ -5,9 +5,9 @@ $('td.remove-order').on('click', function () {
     var delete_result = confirm("Удалить заказ?");
     if(delete_result){
         $.ajax({
-            url: 'remove-order.php?id='+thisID,
+            url: 'order-remove.php?id='+thisID,
             success: function () {
-                thisTR.fadeOut(500);
+                thisTR.fadeOut(700);
             }
         });
     }

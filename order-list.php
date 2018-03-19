@@ -31,8 +31,8 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders");
             <td><?=htmlentities($item['price_flowers'])?></td>
             <td><?=htmlentities($item['price_delivery'])?></td>
             <td><?=htmlentities($item['price_summary'])?></td>
-            <td><?=htmlentities($item['date_create'])?></td>
-            <td><?=htmlentities($item['date_complete'])?></td>
+            <td><?=convertDateFormat(htmlentities($item['date_create']))?></td>
+            <td><?=convertDateFormat(htmlentities($item['date_complete']))?></td>
             <td class="edit-order">edit</td>
             <td class="remove-order">×</td>
         </tr>
