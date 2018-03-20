@@ -6,6 +6,7 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders");
 <table>
     <thead>
         <tr>
+
             <th>Номер заказа</th>
             <th>Имя</th>
             <th>Адрес</th>
@@ -15,7 +16,9 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders");
             <th>Стоимость доставки</th>
             <th>Итого</th>
             <th>Дата создания</th>
-            <th>Дата закрытия</th>
+            <th>Оплата</th>
+            <th>Дата оплаты</th>
+            <th>Дата отправки</th>
             <th>Редактировать</th>
             <th>Удалить</th>
         </tr>
@@ -27,12 +30,18 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders");
             <td><?=htmlentities($item['name'])?></td>
             <td><?=htmlentities($item['address'])?></td>
             <td><?=htmlentities($item['phone'])?></td>
-            <td><?=htmlentities($item['list_flowers'])?></td>
+            <td><?=printFlowersList(htmlentities($item['list_flowers']))?></td>
             <td><?=htmlentities($item['price_flowers'])?></td>
             <td><?=htmlentities($item['price_delivery'])?></td>
             <td><?=htmlentities($item['price_summary'])?></td>
             <td><?=convertDateFormat(htmlentities($item['date_create']))?></td>
-            <td><?=convertDateFormat(htmlentities($item['date_complete']))?></td>
+            <td><?php
+                if(!htmlentities($item['payment'])){
+                    echo 'Не оплачен';
+                }
+                ?></td>
+            <td><?=convertDateFormat(htmlentities($item['date_payment']))?></td>
+            <td><?=convertDateFormat(htmlentities($item['date_departure']))?></td>
             <td class="edit-order">edit</td>
             <td class="remove-order">×</td>
         </tr>

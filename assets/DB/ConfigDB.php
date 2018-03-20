@@ -1,9 +1,9 @@
 <?php
 class ConfigDB{
-    protected $dbHost = 'localhost';
+    protected $dbHost = '185.76.82.107';
     protected $dbName = 'flowers';
     protected $dbUser = 'root';
-    protected $dbPassword = '';
+    protected $dbPassword = 'root';
     protected $dbPort = '3306';
 }
 
