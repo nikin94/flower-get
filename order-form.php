@@ -30,7 +30,7 @@
         </tr>
         <tr class="price_summary">
             <td><label for="price_summary">Итого </label></td>
-            <td> <input name="price_summary" id="price_summary" type="number" disabled></td>
+            <td> <input name="price_summary" id="price_summary" type="number"></td>
         </tr>
         <tr class="payment">
             <td><label for="payment">Оплачен</label></td>
@@ -38,11 +38,11 @@
         </tr>
         <tr class="date_payment" style="display: none;">
             <td> <label for="date_payment">Дата оплаты </label></td>
-            <td> <input name="date_payment" id="date_payment" type="date"></td>
+            <td> <input name="date_payment" id="date_payment" type="datetime-local"></td>
         </tr>
         <tr class="date_departure">
             <td> <label for="date_departure">Дата отправки</label></td>
-            <td> <input name="date_departure" id="date_departure" type="date" value=""></td>
+            <td> <input name="date_departure" id="date_departure" type="datetime-local" value=""></td>
         </tr>
     </table>
 

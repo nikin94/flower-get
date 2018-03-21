@@ -15,7 +15,7 @@ $('#order-list td.remove-order').on('click', function () {/*confirm и удал�
 $('#order-add table tr td #payment').click(function () {/*открытие текущей даты оплаты заказа и скрытие по значению чекбокса*/
     if(this.checked){
         var date = new Date();
-        var dateVaules = date.getFullYear()+'-'+("0" + (date.getMonth() + 1)).slice(-2)+'-'+("0" + date.getDate()).slice(-2);
+        var dateVaules = date.getFullYear()+'-'+("0" + (date.getMonth() + 1)).slice(-2)+'-'+("0" + date.getDate()).slice(-2)+'T'+date.getHours()+':'+date.getMinutes();
         $('#order-add table tr.date_payment input#date_payment').val(dateVaules);
         $('#order-add table tr.date_payment').fadeIn(400);
 

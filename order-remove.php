@@ -7,4 +7,3 @@ if($dbClass->queryUPDATE("DELETE FROM orders WHERE id=".$id)){
 }else{
     echo '{"TYPE":"ERROR","MESSAGE":"Ошибка!"}';
 }
-$dbClass->__destruct();

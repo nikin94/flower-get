@@ -9,9 +9,11 @@ $list_flowers = isset($_POST['list_flowers']) ? $_POST['list_flowers']:-1;
 $price_flowers = isset($_POST['price_flowers']) ? $_POST['price_flowers']:'null';
 $price_delivery = isset($_POST['price_delivery']) ? $_POST['price_delivery']:'null';
 $price_summary = isset($_POST['price_summary']) ? $_POST['price_summary']:'null';
-$date_create = isset($_POST['date_create']) ? $_POST['date_create']:'null';
-$payment = isset($_POST['payment']) ? $_POST['payment']:'null';
-$date_payment = !empty($_POST['date_payment']) ? "'{$_POST['date_payment']}'" : 'null';
+$date_create = date("Y-m-d H:i");
+$payment = isset($_POST['payment']) ? '1':'0';
+$date_payment = !empty($_POST['date_payment']) ? "{$_POST['date_payment']}" : 'null';
+$date_payment = str_replace('T',' ', $date_payment);
 $date_departure = isset($_POST['date_departure']) ? $_POST['date_departure']:'null';
-
-$dbClass->queryUPDATE('insert into orders ("name","address","phone","list_flowers","price_flowers","price_delivery","price_summary","date_create","payment","date_payment","date_departure") values ('.$name.','.$address.','.$phone.','.$list_flowers.','.$price_flowers.','.$price_delivery.','.$price_summary.','.$date_create.','.$payment.','.$date_payment.','.$date_departure.')');
+$date_departure = str_replace('T',' ', $date_departure);
+$sql = "insert into orders (name,address,phone,list_flowers,price_flowers,price_delivery,price_summary,date_create,payment,date_payment,date_departure) values (\"$name\",\"$address\",$phone,\"$list_flowers\",$price_flowers,$price_delivery,$price_summary,\"$date_create\",\"$payment\",\"$date_payment\",\"$date_departure\")";
+$dbClass->queryUPDATE($sql);
