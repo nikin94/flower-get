@@ -1,3 +1,10 @@
+$('td.td-date_departure, td.date_payment').each(function () {
+    if($(this).text() === '00-00-0000 00:00'){
+        $(this).text('');
+    }
+});
+
+
 $('#order-list td.remove-order').on('click', function () {/*confirm и удаление заказа*/
     var thisTR = $(this).parent();
     var thisID = thisTR.find("td:first-child").text();

@@ -8,3 +8,4 @@
 <link rel="stylesheet" href="assets/css/reset.css">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/img/icons/favicon.png">

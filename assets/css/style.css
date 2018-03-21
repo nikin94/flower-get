@@ -3,6 +3,7 @@ body{
     background: url("/flowers/assets/img/bg.jpg") no-repeat 0 0;
     -webkit-background-size: cover;
     background-size: cover;
+    line-height: 1.3;
 }
 
 body *{
@@ -47,7 +48,8 @@ header nav ul li a:hover{
     color: #000;
 }
 
-table#order-list{
+#order-list{
+    max-width: 95vw;
     border-collapse: collapse;
     text-align: center;
     background-color: rgba(255,255,255,.9);
@@ -57,21 +59,18 @@ table#order-list{
     border-radius: 10px;
 }
 
-table#order-list td,
-table#order-list th{
-    border: 1px solid rgba(0,0,0,.3);
+#order-list td,
+#order-list th{
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,.2);
     padding: 5px;
     vertical-align: middle;
-}
-.remove-order{
-    cursor: pointer;
-    font-size: 26px;
 }
 
 #order-add {
     margin: 15px auto 0 auto;
     width: 500px;
-    background-color: rgba(255,255,255,.9);
+    background-color: rgba(255,255,255,.85);
     padding: 10px;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
@@ -123,6 +122,105 @@ table#order-list th{
     height: 50px;
     cursor: pointer;
 }
-#order-add #price_summary:hover{
-    cursor: text;
+
+#order-list thead tr:first-child{
+    background-color: rgba(255,255,255,.6);
 }
+#order-list thead tr th:first-child{
+    border-top-left-radius: 25px;
+}
+#order-list thead tr th:last-child{
+    border-top-right-radius: 25px;
+}
+#order-list tbody tr:nth-child(2n){
+    background-color: rgba(247, 236, 131, 0.15);
+}
+#order-list tbody tr:last-child{
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+#order-list th{
+    font-weight: 600;
+}
+#order-list .td-price_summary{
+    font-weight: 600;
+    font-size: 18px;
+}
+.th-id{
+    width: 40px;
+}
+.th-list_flowers{
+    width: 300px;
+}
+
+th img.th-icon{
+    max-width: 50px;
+    height:auto;
+    max-height: 50px;
+    position: relative;
+    display: inline-block;
+}
+
+td.edit-order img,
+td.remove-order img{
+    width: 35px;
+}
+
+.th-name,
+.th-address,
+.th-phone{
+    width: 150px;
+}
+.th-date_create,
+.th-date_departure,
+.th-date_payment{
+    width: 100px;
+}
+.th-price_delivery,
+.th-price_flowers,
+.th-price_summary{
+    width: 65px;
+}
+.th-edit-order,
+.th-remove-order{
+    width: 60px;
+    cursor: pointer;
+}
+
+/*tooltip*/
+
+th .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+th .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+th:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/*tooltip*/
