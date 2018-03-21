@@ -30,21 +30,29 @@ $('#order-add input#price_flowers, #order-add input#price_delivery').keyup(funct
     $('#order-add input#price_summary').val(+price_flowers+(+price_delivery));
 });
 
-$('#order-list img.payment-img').on('click', function () {/*Оплата заказа - замена картинки по клику и отправка времени оплаты*/
+$('#order-list img.payment-img').on('click', function () {/*Оплата заказа - замена картинки по клику, отправка времени оплаты, замена значения в ячейке*/
     var _this = $(this);
+    var thisID = _this.parent().parent().find('td:first-child').text();
     var date = new Date();
-    var dateVaules = date.getFullYear()+'-'+("0" + (date.getMonth() + 1)).slice(-2)+'-'+("0" + date.getDate()).slice(-2)+' '+date.getHours()+':'+date.getMinutes();
+    var dateValues = date.getFullYear()+'-'+("0" + (date.getMonth() + 1)).slice(-2)+'-'+("0" + date.getDate()).slice(-2)+' '+date.getHours()+':'+date.getMinutes();
+    var dateValuesNormal = ("0" + date.getDate()).slice(-2)+'-'+("0" + (date.getMonth() + 1)).slice(-2)+'-'+date.getFullYear()+' '+date.getHours()+':'+date.getMinutes();
     if($(this).hasClass('payment-img-no')){
         $.post('order-update.php',{
+            'id': thisID,
             'payment':true,
-            'payment_time':dateVaules
+            'date_payment':dateValues
         }).done(function () {
             _this.removeClass('payment-img-no').addClass('payment-img-yes').attr('src',"assets/img/yes.png");
+            _this.parent().next().html(dateValuesNormal);
         });
-    }else if($(this).hasClass('payment-img-yes')){
+    }else if($(this).hasClass('payment-img-yes') && confirm('Отметить заказ, как НЕоплаченный?')){
         $.post('order-update.php',{
+            'id': thisID,
             'payment':false,
-            'payment_time': ""
+            'date_payment': ""
+        }).done(function () {
+            _this.removeClass('payment-img-yes').addClass('payment-img-no').attr('src',"assets/img/no.png");
+            _this.parent().next().html('');
         });
     }
 });
