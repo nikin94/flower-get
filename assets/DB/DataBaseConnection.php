@@ -38,4 +38,7 @@ class DataBaseConnection extends ConfigDB{
         if(mysqli_query($this->db, $sql))return true;
         return false;
     }
+    public function getDB(){
+        return $this->db;
+    }
 }

@@ -123,3 +123,6 @@ table#order-list th{
     height: 50px;
     cursor: pointer;
 }
+#order-add #price_summary:hover{
+    cursor: text;
+}
