@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 $arrayListOrders = $dbClass->querySELECT("select * from orders");
 ?>
 
-<table>
+<table id="order-list">
     <thead>
         <tr>
 
@@ -37,7 +37,9 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders");
             <td><?=convertDateFormat(htmlentities($item['date_create']))?></td>
             <td><?php
                 if(!htmlentities($item['payment'])){
-                    echo 'Не оплачен';
+                    echo '<img class="payment-img payment-img-no" src="assets/img/no.png">';
+                }else{
+                    echo '<img class="payment-img payment-img-yes" src="assets/img/yes.png">';
                 }
                 ?></td>
             <td><?=convertDateFormat(htmlentities($item['date_payment']))?></td>

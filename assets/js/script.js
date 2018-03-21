@@ -1,5 +1,4 @@
-$('td.remove-order').on('click', function () {
-    // event.preventDefault();
+$('#order-list td.remove-order').on('click', function () {/*confirm и удаление заказа*/
     var thisTR = $(this).parent();
     var thisID = thisTR.find("td:first-child").text();
     var delete_result = confirm("Удалить заказ?");
@@ -9,6 +8,43 @@ $('td.remove-order').on('click', function () {
             success: function () {
                 thisTR.fadeOut(700);
             }
+        });
+    }
+});
+
+$('#order-add table tr td #payment').click(function () {/*открытие текущей даты оплаты заказа и скрытие по значению чекбокса*/
+    if(this.checked){
+        var date = new Date();
+        var dateVaules = date.getFullYear()+'-'+("0" + (date.getMonth() + 1)).slice(-2)+'-'+("0" + date.getDate()).slice(-2);
+        $('#order-add table tr.date_payment input#date_payment').val(dateVaules);
+        $('#order-add table tr.date_payment').fadeIn(400);
+
+    }else {
+        $('#order-add table tr.date_payment').fadeOut(400);
+    }
+});
+
+$('#order-add input#price_flowers, #order-add input#price_delivery').keyup(function () {/*суммируем стоимость в форме*/
+    var price_flowers = $('#order-add input#price_flowers').val();
+    var price_delivery = $('#order-add input#price_delivery').val();
+    $('#order-add input#price_summary').val(+price_flowers+(+price_delivery));
+});
+
+$('#order-list img.payment-img').on('click', function () {/*Оплата заказа - замена картинки по клику и отправка времени оплаты*/
+    var _this = $(this);
+    var date = new Date();
+    var dateVaules = date.getFullYear()+'-'+("0" + (date.getMonth() + 1)).slice(-2)+'-'+("0" + date.getDate()).slice(-2)+' '+date.getHours()+':'+date.getMinutes();
+    if($(this).hasClass('payment-img-no')){
+        $.post('order-update.php',{
+            'payment':true,
+            'payment_time':dateVaules
+        }).done(function () {
+            _this.removeClass('payment-img-no').addClass('payment-img-yes').attr('src',"assets/img/yes.png");
+        });
+    }else if($(this).hasClass('payment-img-yes')){
+        $.post('order-update.php',{
+            'payment':false,
+            'payment_time': ""
         });
     }
 });
