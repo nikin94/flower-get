@@ -2,7 +2,7 @@
 ?>
 
 
-<form action="order-add.php" method="GET" name="order-add" id="order-add">
+<form action="order-add.php" method="POST" name="order-add" id="order-add">
     <table>
         <tr class="name">
             <td><label for="name">Фамилия, имя клиента</label></td>
