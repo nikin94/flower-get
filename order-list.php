@@ -43,7 +43,13 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders");
                 }
                 ?></td>
             <td class="td-date_payment"><?=convertDateFormat(htmlentities($item['date_payment']))?></td>
-            <td class="td-date_departure"><?=convertDateFormat(htmlentities($item['date_departure']))?></td>
+            <td class="td-date_departure"><?php
+                if(isset($item['date_departure']) && $item['date_departure']!== '0000-00-00 00:00:00'){
+                    echo convertDateFormat(htmlentities($item['date_departure']));
+                }else{
+                    echo '<span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png">';
+                }
+                ?></td>
             <td class="edit-order"><a href=""><img src="assets/img/icons/edit_.png" alt="Редактировать"></a></td>
             <td class="remove-order"><img src="assets/img/icons/remove-order_.png" alt="Удалить"></td>
         </tr>
