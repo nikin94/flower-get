@@ -1,7 +1,6 @@
 <?php
 require_once('assets/DB/DataBaseConnection.php');
 $dbClass = new DataBaseConnection();
-
 $name = isset($_POST['name']) ? $_POST['name']:-1;
 $address = isset($_POST['address']) ? $_POST['address']:-1;
 $phone = isset($_POST['phone']) ? $_POST['phone']:'null';
@@ -17,4 +16,5 @@ $date_departure = !empty($_POST['date_departure']) ? "{$_POST['date_departure']}
 $date_departure = str_replace('T',' ', $date_departure);
 $sql = "insert into orders (name,address,phone,list_flowers,price_flowers,price_delivery,price_summary,date_create,payment,date_payment,date_departure) values (\"$name\",\"$address\",\"$phone\",\"$list_flowers\",$price_flowers,$price_delivery,$price_summary,\"$date_create\",\"$payment\",\"$date_payment\",\"$date_departure\")";
 $dbClass->queryUPDATE($sql);
+header('location: index.php?list=added');
 echo mysqli_error($dbClass->getDB());

@@ -6,7 +6,6 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders");
 <table id="order-list">
     <thead>
         <tr>
-
             <th class="th-id"><img class="th-icon" src="assets/img/icons/id.png"><span class="tooltiptext">Номер заказа</span></th>
             <th class="th-name"><img class="th-icon" src="assets/img/icons/name.png"><span class="tooltiptext">Имя заказчика</span></th>
             <th class="th-address"><img class="th-icon" src="assets/img/icons/address.png"><span class="tooltiptext">Адрес</span></th>

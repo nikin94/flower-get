@@ -70,12 +70,14 @@ $('#order-list img.send-img, #order-list span.send-text').on('click', function (
     var date = new Date();
     var hours = date.getHours() < 10 ? '0'+date.getHours() : date.getHours();
     var minutes = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes();
-    var dateValuesSQL = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + ' ' + hours + ':' + minutes + ':' + date.getSeconds();
+    var seconds = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds();
+    var dateValuesSQL = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + ' ' + hours + ':' + minutes + ':' + seconds;
     var dateValuesNormal = ("0" + date.getDate()).slice(-2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + hours + ':' + minutes;
     $.post('order-update.php',{
         'id': thisID,
         'date_departure': dateValuesSQL
     }).done(function (result) {
+        console.log(result);
         _this.parent().html(dateValuesNormal);
     });
 });
