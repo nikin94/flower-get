@@ -20,3 +20,4 @@ function printFlowersList($str){/*В список цветов вместо за
         echo $item."<br>";
     }
 }
+

@@ -64,17 +64,18 @@ $('#order-list img.payment-img').on('click', function () {/*Оплата зак�
     }
 });
 
-$('#order-list img.send-img, #order-list span.send-text').on('click', function () {
+$('#order-list img.send-img, #order-list span.send-text').on('click', function () {/*Добавляем время отправки заказа вместо кнопки*/
     var _this = $(this);
     var thisID = _this.parent().parent().find('td:first-child').text();
     var date = new Date();
-    var dateValuesSQL = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-    var dateValuesNormal = ("0" + date.getDate()).slice(-2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
+    var hours = date.getHours() < 10 ? '0'+date.getHours() : date.getHours();
+    var minutes = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes();
+    var dateValuesSQL = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + ' ' + hours + ':' + minutes + ':' + date.getSeconds();
+    var dateValuesNormal = ("0" + date.getDate()).slice(-2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + hours + ':' + minutes;
     $.post('order-update.php',{
         'id': thisID,
         'date_departure': dateValuesSQL
     }).done(function (result) {
-        console.log(_this);
         _this.parent().html(dateValuesNormal);
     });
 });
