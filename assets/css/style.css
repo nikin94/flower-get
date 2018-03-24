@@ -213,12 +213,13 @@ td.td-date_departure span.send-text{
     width: 65px;
 }
 .th-edit-order,
-.th-remove-order{
+.th-remove-order,
+.th-payment{
     width: 60px;
-    cursor: pointer;
 }
 
 /*tooltip*/
+
 
 .tooltip .tooltiptext {
     visibility: hidden;
@@ -235,16 +236,17 @@ td.td-date_departure span.send-text{
     margin-left: -60px;
     opacity: 0;
     transition: opacity 0.3s;
+    font-weight: 600;
 }
 
 .tooltip .tooltiptext::after {
     content: "";
     position: absolute;
     top: 100%;
-    left: 50%;
+    right: 45%;
     margin-left: -5px;
     border: 5px solid;
-    border-color: #555 transparent transparent transparent;
+    border-color:  #555 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
@@ -253,3 +255,7 @@ td.td-date_departure span.send-text{
 }
 
 /*tooltip*/
+
+#order-update-form{
+    display: table-row;
+}
