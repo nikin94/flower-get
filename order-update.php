@@ -49,4 +49,6 @@ if ($dbClass->queryUPDATE($sql)) {
 } else {
     echo '{"TYPE":"ERROR","MESSAGE":"Ошибка!"}';
 }
-echo mysqli_error($dbClass->getDB());
+
+header('location: index.php?list=updated');
+//echo mysqli_error($dbClass->getDB());

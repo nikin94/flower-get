@@ -64,7 +64,7 @@ $('#order-list img.payment-img').on('click', function () {/*Оплата зак�
     }
 });
 
-$('#order-list img.send-img, #order-list span.send-text').on('click', function () {/*Добавляем время отправки заказа вместо кнопки*/
+$('body').on('click', '#order-list .td-date_departure .send-YES, #order-list .td-date_departure .send-NO', function () {/*Добавляем время отправки заказа вместо кнопки*/
     var _this = $(this);
     var thisID = _this.parent().parent().find('td:first-child').text();
     var date = new Date();
@@ -73,11 +73,19 @@ $('#order-list img.send-img, #order-list span.send-text').on('click', function (
     var seconds = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds();
     var dateValuesSQL = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + ' ' + hours + ':' + minutes + ':' + seconds;
     var dateValuesNormal = ("0" + date.getDate()).slice(-2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + hours + ':' + minutes;
-    $.post('order-update.php',{
-        'id': thisID,
-        'date_departure': dateValuesSQL
-    }).done(function (result) {
-        console.log(result);
-        _this.parent().html(dateValuesNormal);
-    });
+    if(_this.hasClass('send-NO')){
+        $.post('order-update.php',{
+            'id': thisID,
+            'date_departure': dateValuesSQL
+        }).done(function (result) {
+            _this.parent().html('<div class="send-YES tooltip"><span class="send-text">Отправлен</span><img class="send-img" src="assets/img/icons/send_success.png"><span class="tooltiptext">'+dateValuesNormal+'</span></div>');
+        });
+    }else if(_this.hasClass('send-YES') && confirm('Отметить заказ, как НЕ отправленный?')){
+        $.post('order-update.php',{
+            'id': thisID,
+            'date_departure': '0000-00-00 00:00:00'
+        }).done(function (result) {
+            _this.parent().html('<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>');
+        });
+    }
 });
