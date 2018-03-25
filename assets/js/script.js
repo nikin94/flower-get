@@ -19,15 +19,17 @@ $('#order-list td.remove-order').on('click', function () {/*confirm и удал�
     }
 });
 
-$('#order-add table tr td #payment').click(function () {/*открытие текущей даты оплаты заказа и скрытие по значению чекбокса*/
+$('#order-add table tr td #payment, #order-add table tr td #departure').click(function () {/*открытие текущей даты оплаты заказа и скрытие по значению чекбокса*/
+    var date = new Date();
+    var dateVaules = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + 'T' + date.getHours() + ':' + date.getMinutes();
+    var _this = $(this);
     if (this.checked) {
-        var date = new Date();
-        var dateVaules = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + 'T' + date.getHours() + ':' + date.getMinutes();
-        $('#order-add table tr.date_payment input#date_payment').val(dateVaules);
-        $('#order-add table tr.date_payment').fadeIn(400);
+        _this.closest('tr').next().find('input').val(dateVaules);
+        _this.closest('tr').next().fadeIn(400);
 
     } else {
-        $('#order-add table tr.date_payment').fadeOut(400);
+        _this.closest('tr').next().find('input').val('');
+        _this.closest('tr').next().fadeOut(400);
     }
 });
 
@@ -62,7 +64,7 @@ $('body').on('click', '#order-list img.payment-img', function () {/*КНОПКА
             'payment': 1,
             'date_payment': dateValuesSQL
         }).done(function () {
-            _this.html('<div class="tooltip"><img class="payment-img payment-img-yes" src="assets/img/yes.png"><span class="tooltiptext">'+dateValuesNormal+'</span></div>');
+            _this.html('<div class="tooltip"><img class="payment-img payment-img-yes" src="assets/img/icons/yes.png"><span class="tooltiptext">'+dateValuesNormal+'</span></div>');
         });
     } else if (_this.find('img.payment-img').hasClass('payment-img-yes') && confirm('Отметить заказ, как НЕ оплаченный?')) {
         $.post('order-update.php', {
@@ -70,7 +72,7 @@ $('body').on('click', '#order-list img.payment-img', function () {/*КНОПКА
             'payment': 0,
             'date_payment': null
         }).done(function (result) {
-            _this.html('<img class="payment-img payment-img-no" src="assets/img/no.png">');
+            _this.html('<img class="payment-img payment-img-no" src="assets/img/icons/no.png">');
         });
     }
 });
@@ -101,13 +103,13 @@ $('body').on('click', '#order-list .td-date_departure .send-YES, #order-list .td
     }
 });
 
-$('td.edit-order img').on('click', function () {
+$('body').on('click', 'td.edit-order img.img-edit', function () {
     var _this = $(this).closest('td');
     var thisID = _this.closest('tr').find('td:first-child').text();
     $.post('order-update-form.php',{
-        'id': +thisID,
-        'name': _this.closest('tr').find('td.td-name').text()
+        'id': +thisID
     }).done(function (result) {
-        _this.parent().html('<td>'+thisID+'</td>'+'<td>'+result+'</td>');
+        _this.closest('tr').replaceWith(result);
+
     });
 });

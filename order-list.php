@@ -9,7 +9,7 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY id DESC"
             <th class="th-id tooltip"><img class="th-icon" src="assets/img/icons/id.png"><span class="tooltiptext">Номер заказа</span></th>
             <th class="th-name tooltip"><img class="th-icon" src="assets/img/icons/name.png"><span class="tooltiptext">Имя заказчика</span></th>
             <th class="th-address tooltip"><img class="th-icon" src="assets/img/icons/address.png"><span class="tooltiptext">Адрес</span></th>
-            <th class="th-phone tooltip"><img class="th-icon" src="assets/img/icons/phone.png"><span class="tooltiptext">Телефон</span></th>
+            <!--<th class="th-phone tooltip"><img class="th-icon" src="assets/img/icons/phone.png"><span class="tooltiptext">Телефон</span></th>-->
             <th class="th-list_flowers tooltip"><img class="th-icon" src="assets/img/icons/list_flowers.png"><span class="tooltiptext">Список растений</span></th>
             <th class="th-price_flowers tooltip"><img class="th-icon" src="assets/img/icons/price_flowers.png"><span class="tooltiptext">Цена растений</span></th>
             <th class="th-price_delivery tooltip"><img class="th-icon" src="assets/img/icons/price_delivery.png"><span class="tooltiptext">Стоимость доставки</span></th>
@@ -27,8 +27,7 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY id DESC"
         <tr>
             <td class="td-id"><?=htmlentities($item['id'])?></td>
             <td class="td-name"><?=htmlentities($item['name'])?></td>
-            <td class="td-address"><?=htmlentities($item['address'])?></td>
-            <td class="td-phone"><?=htmlentities($item['phone'])?></td>
+            <td class="td-address"><?=htmlentities($item['address']).(isset($item['phone']) ? ",<br>".htmlentities($item['phone']) : '')?></td>
             <td class="td-list_flowers"><?=printFlowersList(htmlentities($item['list_flowers']))?></td>
             <td class="td-price_flowers"><?=htmlentities($item['price_flowers'])?></td>
             <td class="td-price_delivery"><?=htmlentities($item['price_delivery'])?></td>
@@ -36,9 +35,9 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY id DESC"
             <td class="td-date_create"><?=convertDateFormat(htmlentities($item['date_create']))?></td>
             <td class="td-payment"><?php
                 if(!htmlentities($item['payment'])){
-                    echo '<img class="payment-img payment-img-no" src="assets/img/no.png">';
+                    echo '<img class="payment-img payment-img-no" src="assets/img/icons/no.png">';
                 }else{
-                    echo '<div class="tooltip"><img class="payment-img payment-img-yes" src="assets/img/yes.png"><span class="tooltiptext">'.convertDateFormat(htmlentities($item['date_payment'])).'</span></div>';
+                    echo '<div class="tooltip"><img class="payment-img payment-img-yes" src="assets/img/icons/yes.png"><span class="tooltiptext">'.convertDateFormat(htmlentities($item['date_payment'])).'</span></div>';
                 }
                 ?></td>
             <td class="td-date_departure"><?php
@@ -48,7 +47,7 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY id DESC"
                     echo '<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>';
                 }
                 ?></td>
-            <td class="edit-order"><img src="assets/img/icons/edit_.png" alt="Редактировать"></td>
+            <td class="edit-order"><img class="img-edit" src="assets/img/icons/edit_.png" alt="Редактировать"></td>
             <td class="remove-order"><img src="assets/img/icons/remove-order_.png" alt="Удалить"></td>
         </tr>
     <?php endforeach;?>

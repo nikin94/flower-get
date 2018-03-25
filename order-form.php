@@ -40,12 +40,15 @@
             <td> <label for="date_payment">Дата оплаты </label></td>
             <td> <input name="date_payment" id="date_payment" type="datetime-local"></td>
         </tr>
-        <tr class="date_departure">
+        <tr class="departure">
+            <td><label for="departure">Отправлен</label></td>
+            <td><input name="departure" id="departure" type="checkbox"></td>
+        </tr>
+        <tr class="date_departure" style="display: none;">
             <td> <label for="date_departure">Дата отправки</label></td>
             <td> <input name="date_departure" id="date_departure" type="datetime-local" value=""></td>
         </tr>
     </table>
-
     <button>Добавить заказ</button>
 </form>
 

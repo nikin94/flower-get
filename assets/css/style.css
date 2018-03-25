@@ -108,7 +108,7 @@ header nav ul li a:hover{
 #order-add textarea{
     max-width: 290px;
     min-width: 290px;
-    min-height: 100px;
+    min-height: 200px;
 }
 #order-add button{
     text-align: center;
@@ -143,10 +143,27 @@ header nav ul li a:hover{
 #order-list th{
     font-weight: 600;
 }
-#order-list .td-price_summary{
+
+#order-list td input{
+    padding: 5px;
+}
+#order-list td textarea{
+    max-width: 290px;
+    min-width: 290px;
+    width: 290px;
+    min-height: 150px;
+}
+.td-price_flowers input,
+.td-price_delivery input,
+.td-price_summary input{
+    width: 75px;
+}
+
+.td-price_flowers{
     font-weight: 600;
     font-size: 18px;
 }
+
 .th-id{
     width: 40px;
 }
@@ -258,4 +275,7 @@ td.td-date_departure span.send-text{
 
 #order-update-form{
     display: table-row;
+}
+#order-update-form input{
+    display: table-cell;
 }
