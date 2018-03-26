@@ -1,6 +1,6 @@
 body{
     font-family: "Roboto";
-    background: url("/flowers/assets/img/bg.jpg") no-repeat 0 0;
+    background: url("/flowers/assets/img/bg.jpg") no-repeat 0 0 fixed;
     -webkit-background-size: cover;
     background-size: cover;
     line-height: 1.3;
@@ -178,12 +178,15 @@ th img.th-icon{
     position: relative;
     display: inline-block;
 }
-
+td.edit-order img.img-save{
+    width: 50px;
+}
 td.edit-order img,
 td.remove-order img{
     width: 35px;
     cursor: pointer;
 }
+
 
 td.td-date_departure .send-YES,
 td.td-date_departure .send-NO,
@@ -278,4 +281,9 @@ td.td-date_departure span.send-text{
 }
 #order-update-form input{
     display: table-cell;
+}
+
+.monochrome{
+    -webkit-filter: grayscale(100%);  /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
 }

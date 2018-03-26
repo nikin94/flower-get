@@ -33,19 +33,18 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
     }
 });
 
-$('#order-add input#price_flowers, #order-add input#price_delivery').keyup(function () {/*суммируем стоимость в форме*/
-    var price_flowers = $('#order-add input#price_flowers').val();
-    var price_delivery = $('#order-add input#price_delivery').val();
-    $('#order-add input#price_summary').val(+price_flowers + (+price_delivery));
-});
-$('#order-add input#price_summary').keyup(function () {
+$('#order-add input#price_flowers, #order-add input#price_delivery, #order-add input#price_summary').keyup(function () {/*суммируем стоимость в форме*/
     var price_flowers = $('#order-add input#price_flowers');
     var price_delivery = $('#order-add input#price_delivery');
     var price_summary = $('#order-add input#price_summary');
-    if(price_summary.val() - price_delivery.val() > 0){
-        price_flowers.val(+price_summary.val() - +price_delivery.val());
-    }else{
-        price_flowers.val(0);
+    if($(this).attr('id') == 'price_flowers' || $(this).attr('id') == 'price_delivery'){
+        price_summary.val(+price_flowers.val() + +price_delivery.val());
+    }else {
+        if(price_summary.val() - price_delivery.val() > 0){
+            price_flowers.val(+price_summary.val() - +price_delivery.val());
+        }else{
+            price_flowers.val(0);
+        }
     }
 });
 
@@ -98,18 +97,43 @@ $('body').on('click', '#order-list .td-date_departure .send-YES, #order-list .td
             'id': thisID,
             'date_departure': '0000-00-00 00:00:00'
         }).done(function (result) {
+            console.log(result);
             _this.parent().html('<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>');
         });
     }
 });
 
-$('body').on('click', 'td.edit-order img.img-edit', function () {
+$('body').on('click', 'td.edit-order .img-edit', function () {
     var _this = $(this).closest('td');
     var thisID = _this.closest('tr').find('td:first-child').text();
-    $.post('order-update-form.php',{
-        'id': +thisID
+    if(_this.hasClass('edit')) _this.addClass('edit-current');
+    $('#order-list td.edit-order').each(function () {
+        $(this).removeClass('edit');
+        $(this).find('img[src*="edit"]').addClass('monochrome');
+    });
+    if (_this.hasClass('edit-current')){
+        $.post('order-update-form.php',{
+            'id': +thisID
+        }).done(function (result) {
+            _this.closest('tr').replaceWith(result);
+        });
+    }
+});
+
+$('body').on('click', 'td.edit-order .img-save', function () {
+    var this_td = $(this).closest('td');
+    var this_tr = $(this).closest('tr');
+    var thisID = this_tr.find('td:first-child').text();
+    $.post('order-update.php', {
+        'id': thisID,
+        'name': this_tr.find('td.td-name input#name').val(),
+        'address': this_tr.find('td.td-address input#address').val(),
+        'phone': this_tr.find('td.td-address input#phone').val(),
+        'list_flowers': this_tr.find('td.td-list_flowers textarea#list_flowers').val(),
+        'price_flowers': +this_tr.find('td.td-price_flowers input#price_flowers').val(),
+        'price_delivery': +this_tr.find('td.td-price_delivery input#price_delivery').val(),
+        'price_summary': +this_tr.find('td.td-price_summary input#price_summary').val()
     }).done(function (result) {
-        _this.closest('tr').replaceWith(result);
 
     });
 });

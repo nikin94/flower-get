@@ -27,7 +27,7 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY id DESC"
         <tr>
             <td class="td-id"><?=htmlentities($item['id'])?></td>
             <td class="td-name"><?=htmlentities($item['name'])?></td>
-            <td class="td-address"><?=htmlentities($item['address']).(isset($item['phone']) ? ",<br>".htmlentities($item['phone']) : '')?></td>
+            <td class="td-address"><?=htmlentities($item['address']).(isset($item['phone']) && $item['phone'] != -1 ? ",<br>".htmlentities($item['phone']) : '')?></td>
             <td class="td-list_flowers"><?=printFlowersList(htmlentities($item['list_flowers']))?></td>
             <td class="td-price_flowers"><?=htmlentities($item['price_flowers'])?></td>
             <td class="td-price_delivery"><?=htmlentities($item['price_delivery'])?></td>
@@ -47,7 +47,7 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY id DESC"
                     echo '<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>';
                 }
                 ?></td>
-            <td class="edit-order"><img class="img-edit" src="assets/img/icons/edit_.png" alt="Редактировать"></td>
+            <td class="edit-order edit"><img class="img-edit" src="assets/img/icons/edit_.png" alt="Редактировать"></td>
             <td class="remove-order"><img src="assets/img/icons/remove-order_.png" alt="Удалить"></td>
         </tr>
     <?php endforeach;?>

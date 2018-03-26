@@ -12,15 +12,13 @@ $arrayData = $tmp[0];
 
 <tr id="order-update-form">
     <td class="td-id"><?=$id?></td>
-    <td class="td-name"><input value="<?=$arrayData['name']?>"></td>
-    <td class="td-address"><input value="<?=htmlentities($arrayData['address'])?>"><br><?php
-        if(isset($arrayData['phone'])){
-            echo "<input value='".htmlentities($arrayData['phone'])."'>";
-        }?></td>
-    <td class="td-list_flowers"><textarea><?=htmlentities($arrayData['list_flowers'])?></textarea></td>
-    <td class="td-price_flowers"><input type="number" value="<?=htmlentities($arrayData['price_flowers'])?>"></td>
-    <td class="td-price_delivery"><input type="number" value="<?=htmlentities($arrayData['price_delivery'])?>"></td>
-    <td class="td-price_summary"><input type="number" value="<?=htmlentities($arrayData['price_summary'])?>"></td>
+    <td class="td-name"><input id="name" value="<?=$arrayData['name']?>"></td>
+    <td class="td-address"><label>Адрес<input id="address" value="<?=htmlentities($arrayData['address'])?>"></label><br><?="<label>Телефон<input id='phone' value='".htmlentities($arrayData['phone'])."'></label>";
+        ?></td>
+    <td class="td-list_flowers"><textarea id="list_flowers"><?=htmlentities($arrayData['list_flowers'])?></textarea></td>
+    <td class="td-price_flowers"><input id="price_flowers" type="number" value="<?=htmlentities($arrayData['price_flowers'])?>"></td>
+    <td class="td-price_delivery"><input id="price_delivery" type="number" value="<?=htmlentities($arrayData['price_delivery'])?>"></td>
+    <td class="td-price_summary"><input id="price_summary" type="number" value="<?=htmlentities($arrayData['price_summary'])?>"></td>
     <td class="td-date_create"><?=convertDateFormat(htmlentities($arrayData['date_create']))?></td>
     <td class="td-payment"><?php
         if(!htmlentities($arrayData['payment'])){
@@ -36,7 +34,7 @@ $arrayData = $tmp[0];
             echo '<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>';
         }
         ?></td>
-    <td class="edit-order"><img class="img-edit" src="assets/img/icons/edit_.png" alt="Редактировать"></td>
+    <td class="edit-order"><img class="img-save" src="assets/img/icons/save.png" alt="Редактировать"></td>
     <td class="remove-order"><img src="assets/img/icons/remove-order_.png" alt="Удалить"></td>
 </tr>
 
