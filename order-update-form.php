@@ -2,7 +2,6 @@
 error_reporting(E_ALL);
 require_once ('assets/DB/DataBaseConnection.php');
 require_once ('functions.php');
-$dbClass = new DataBaseConnection();
 $id = $_POST['id'];
 $sql = "select * from orders WHERE id = $id";
 $tmp = $dbClass->querySELECT($sql);

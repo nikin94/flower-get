@@ -1,6 +1,6 @@
 <?php
-require_once('assets/DB/DataBaseConnection.php');
-$dbClass = new DataBaseConnection();
+//require_once('assets/DB/DataBaseConnection.php');
+//$dbClass = new DataBaseConnection();
 $name = isset($_POST['name']) ? $_POST['name']:-1;
 $address = isset($_POST['address']) ? $_POST['address']:-1;
 $phone = isset($_POST['phone']) ? $_POST['phone']:'null';

@@ -71,6 +71,7 @@ $('body').on('click', '#order-list img.payment-img', function () {/*КНОПКА
             'payment': 0,
             'date_payment': null
         }).done(function (result) {
+            console.log(result);
             _this.html('<img class="payment-img payment-img-no" src="assets/img/icons/no.png">');
         });
     }
@@ -97,13 +98,12 @@ $('body').on('click', '#order-list .td-date_departure .send-YES, #order-list .td
             'id': thisID,
             'date_departure': '0000-00-00 00:00:00'
         }).done(function (result) {
-            console.log(result);
             _this.parent().html('<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>');
         });
     }
 });
 
-$('body').on('click', 'td.edit-order .img-edit', function () {
+$('body').on('click', 'td.edit-order .img-edit', function () {/*КНОПКА РЕДАКТИРОВАНИЯ*/
     var _this = $(this).closest('td');
     var thisID = _this.closest('tr').find('td:first-child').text();
     if(_this.hasClass('edit')) _this.addClass('edit-current');
@@ -120,7 +120,7 @@ $('body').on('click', 'td.edit-order .img-edit', function () {
     }
 });
 
-$('body').on('click', 'td.edit-order .img-save', function () {
+$('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "СОХРАНИТЬ"*/
     var this_td = $(this).closest('td');
     var this_tr = $(this).closest('tr');
     var thisID = this_tr.find('td:first-child').text();
