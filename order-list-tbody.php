@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY id DESC");
 ?>
 <?php foreach ($arrayListOrders as $item):?>
-    <tr>
+    <tr class="<?='id-'.htmlentities($item['id'])?>">
         <td class="td-id"><?=htmlentities($item['id'])?></td>
         <td class="td-name"><?=htmlentities($item['name'])?></td>
         <td class="td-address"><?=htmlentities($item['address']).(isset($item['phone']) && $item['phone'] != -1 ? ",<br>".htmlentities($item['phone']) : '')?></td>

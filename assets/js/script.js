@@ -1,4 +1,28 @@
-$('td.td-date_departure, td.date_payment').each(function () {
+function getUrlParameter(sParam) {/*Вернёт значение из get-запроса по переданному параметру - ключу*/
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'), sParameterName, i;
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+}
+
+
+if (getUrlParameter('list') !== true) {/*Отмечаем затухающим зеленым цветом отредактированную строку и сносим _GET в url*/
+    $('#order-list .td-id').each(function () {
+        if ($(this).text() == getUrlParameter("list")) {
+            //console.log($(this).css());
+            $(this).closest('tr').css({backgroundColor: '#82ff7b'});
+            $(this).closest('tr').stop().animate({backgroundColor: 'transparent'}, 2000, function () {
+                window.history.pushState({}, "Hide", "/flowers/?list");
+            });
+        }
+    });
+}
+
+$('td.td-date_departure, td.date_payment').each(function () {/*Если даты нет - не выводим*/
     if ($(this).text() === '00-00-0000 00:00') {
         $(this).text('');
     }
@@ -10,11 +34,8 @@ $('#order-list td.remove-order').on('click', function () {/*confirm и удал�
     var thisID = thisTR.find("td:first-child").text();
     var delete_result = confirm("Удалить заказ?");
     if (delete_result) {
-        $.ajax({
-            url: 'order-remove.php?id=' + thisID,
-            success: function () {
-                thisTR.fadeOut(700);
-            }
+        $.get('order-remove.php?id=' + thisID).done(function () {
+            thisTR.fadeOut(1000);
         });
     }
 });
@@ -33,16 +54,16 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
     }
 });
 
-$('#order-add input#price_flowers, #order-add input#price_delivery, #order-add input#price_summary').keyup(function () {/*суммируем стоимость в форме*/
+$('body').on('keyup', '#order-add input#price_flowers, #order-add input#price_delivery, #order-add input#price_summary',function () {/*суммируем стоимость в форме*/
     var price_flowers = $('#order-add input#price_flowers');
     var price_delivery = $('#order-add input#price_delivery');
     var price_summary = $('#order-add input#price_summary');
-    if($(this).attr('id') == 'price_flowers' || $(this).attr('id') == 'price_delivery'){
+    if ($(this).attr('id') == 'price_flowers' || $(this).attr('id') == 'price_delivery') {
         price_summary.val(+price_flowers.val() + +price_delivery.val());
-    }else {
-        if(price_summary.val() - price_delivery.val() > 0){
+    } else {
+        if (price_summary.val() - price_delivery.val() > 0) {
             price_flowers.val(+price_summary.val() - +price_delivery.val());
-        }else{
+        } else {
             price_flowers.val(0);
         }
     }
@@ -52,9 +73,9 @@ $('body').on('click', '#order-list img.payment-img', function () {/*КНОПКА
     var _this = $(this).closest('td.td-payment');
     var thisID = _this.closest('tr').find('td:first-child').text();
     var date = new Date();
-    var hours = date.getHours() < 10 ? '0'+date.getHours() : date.getHours();
-    var minutes = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes();
-    var seconds = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds();
+    var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
     var dateValuesSQL = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + ' ' + hours + ':' + minutes + ':' + seconds;
     var dateValuesNormal = ("0" + date.getDate()).slice(-2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
     if (_this.find('img.payment-img').hasClass('payment-img-no')) {
@@ -63,7 +84,7 @@ $('body').on('click', '#order-list img.payment-img', function () {/*КНОПКА
             'payment': 1,
             'date_payment': dateValuesSQL
         }).done(function () {
-            _this.html('<div class="tooltip"><img class="payment-img payment-img-yes" src="assets/img/icons/yes.png"><span class="tooltiptext">'+dateValuesNormal+'</span></div>');
+            _this.html('<div class="tooltip"><img class="payment-img payment-img-yes" src="assets/img/icons/yes.png"><span class="tooltiptext">' + dateValuesNormal + '</span></div>');
         });
     } else if (_this.find('img.payment-img').hasClass('payment-img-yes') && confirm('Отметить заказ, как НЕ оплаченный?')) {
         $.post('order-update.php', {
@@ -71,7 +92,6 @@ $('body').on('click', '#order-list img.payment-img', function () {/*КНОПКА
             'payment': 0,
             'date_payment': null
         }).done(function (result) {
-            console.log(result);
             _this.html('<img class="payment-img payment-img-no" src="assets/img/icons/no.png">');
         });
     }
@@ -81,20 +101,20 @@ $('body').on('click', '#order-list .td-date_departure .send-YES, #order-list .td
     var _this = $(this);
     var thisID = _this.closest('tr').find('td:first-child').text();
     var date = new Date();
-    var hours = date.getHours() < 10 ? '0'+date.getHours() : date.getHours();
-    var minutes = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes();
-    var seconds = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds();
+    var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
     var dateValuesSQL = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + ' ' + hours + ':' + minutes + ':' + seconds;
     var dateValuesNormal = ("0" + date.getDate()).slice(-2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + hours + ':' + minutes;
-    if(_this.hasClass('send-NO')){
-        $.post('order-update.php',{
+    if (_this.hasClass('send-NO')) {
+        $.post('order-update.php', {
             'id': thisID,
             'date_departure': dateValuesSQL
         }).done(function (result) {
-            _this.parent().html('<div class="send-YES tooltip"><span class="send-text">Отправлен</span><img class="send-img" src="assets/img/icons/send_success.png"><span class="tooltiptext">'+dateValuesNormal+'</span></div>');
+            _this.parent().html('<div class="send-YES tooltip"><span class="send-text">Отправлен</span><img class="send-img" src="assets/img/icons/send_success.png"><span class="tooltiptext">' + dateValuesNormal + '</span></div>');
         });
-    }else if(_this.hasClass('send-YES') && confirm('Отметить заказ, как НЕ отправленный?')){
-        $.post('order-update.php',{
+    } else if (_this.hasClass('send-YES') && confirm('Отметить заказ, как НЕ отправленный?')) {
+        $.post('order-update.php', {
             'id': thisID,
             'date_departure': '0000-00-00 00:00:00'
         }).done(function (result) {
@@ -106,13 +126,13 @@ $('body').on('click', '#order-list .td-date_departure .send-YES, #order-list .td
 $('body').on('click', 'td.edit-order .img-edit', function () {/*КНОПКА РЕДАКТИРОВАНИЯ*/
     var _this = $(this).closest('td');
     var thisID = _this.closest('tr').find('td:first-child').text();
-    if(_this.hasClass('edit')) _this.addClass('edit-current');
+    if (_this.hasClass('edit')) _this.addClass('edit-current');
     $('#order-list td.edit-order').each(function () {
         $(this).removeClass('edit');
         $(this).find('img[src*="edit"]').addClass('monochrome');
     });
-    if (_this.hasClass('edit-current')){
-        $.post('order-update-form.php',{
+    if (_this.hasClass('edit-current')) {
+        $.post('order-update-form.php', {
             'id': +thisID
         }).done(function (result) {
             _this.closest('tr').replaceWith(result);
@@ -134,6 +154,6 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
         'price_delivery': +this_tr.find('td.td-price_delivery input#price_delivery').val(),
         'price_summary': +this_tr.find('td.td-price_summary input#price_summary').val()
     }).done(function (result) {
-
+        window.location.replace("/flowers/?list=" + thisID);
     });
 });

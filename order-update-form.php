@@ -12,7 +12,7 @@ $arrayData = $tmp[0];
 <tr id="order-update-form">
     <td class="td-id"><?=$id?></td>
     <td class="td-name"><input id="name" value="<?=$arrayData['name']?>"></td>
-    <td class="td-address"><label>Адрес<input id="address" value="<?=htmlentities($arrayData['address'])?>"></label><br><?="<label>Телефон<input id='phone' value='".htmlentities($arrayData['phone'])."'></label>";
+    <td class="td-address"><label>Адрес<input id="address" value="<?=htmlentities($arrayData['address'])?>"></label><br><?="<label>Телефон<input id='phone' value='".($arrayData['phone'] != 0 && $arrayData['phone'] != -1 ? htmlentities($arrayData['phone']) : '')."'></label>";
         ?></td>
     <td class="td-list_flowers"><textarea id="list_flowers"><?=htmlentities($arrayData['list_flowers'])?></textarea></td>
     <td class="td-price_flowers"><input id="price_flowers" type="number" value="<?=htmlentities($arrayData['price_flowers'])?>"></td>

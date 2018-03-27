@@ -132,7 +132,7 @@ header nav ul li a:hover{
 #order-list thead tr th:last-child{
     border-top-right-radius: 25px;
 }
-#order-list tbody tr:nth-child(2n){
+#order-list tbody tr:nth-child(2n) td{
     background-color: rgba(247, 236, 131, 0.15);
 }
 #order-list tbody tr:last-child{
