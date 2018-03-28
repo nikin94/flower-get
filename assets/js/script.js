@@ -175,7 +175,6 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
         'bus_delivery': this_tr.find('td.td-price_delivery input#bus_delivery').is(':checked') ? 1 : 0,
         'price_summary': +this_tr.find('td.td-price_summary input#price_summary').val()
     }).done(function (result) {
-        console.log(result);
         window.location.replace("/flowers/?list=" + thisID);
     });
 });
