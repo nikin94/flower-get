@@ -42,18 +42,15 @@ $('#order-list td.remove-order').on('click', function () {/*confirm и удал�
 
 $('#order-add input#bus_delivery').click(function (){
     var price_delivery = $('input#price_delivery');
-    var price_delivery_val = +price_delivery.val();
-    console.log(price_delivery_val);
     if(this.checked){
         price_delivery.attr('disabled', true);
         price_delivery.val(0);
         $('input#price_summary').val(+$('input#price_flowers').val());
     }else {
         price_delivery.attr('disabled', false);
-        price_delivery.val(price_delivery_val);
-        $('input#price_summary').val(+$('input#price_flowers').val()+price_delivery_val);
+        price_delivery.val(350);
+        $('input#price_summary').val(+$('input#price_flowers').val()+350);
     }
-    console.log(price_delivery_val);
 });
 
 $('#order-add table tr td #payment, #order-add table tr td #departure').click(function () {/*открытие текущей даты оплаты заказа и скрытие по значению чекбокса*/
@@ -65,8 +62,9 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
         _this.closest('tr').next().fadeIn(400);
 
     } else {
-        _this.closest('tr').next().find('input').val('');
-        _this.closest('tr').next().fadeOut(400);
+        _this.closest('tr').next().fadeOut(400, function () {
+            _this.closest('tr').next().find('input').val('');
+        });
     }
 });
 
