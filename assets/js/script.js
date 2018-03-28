@@ -40,6 +40,22 @@ $('#order-list td.remove-order').on('click', function () {/*confirm и удал�
     }
 });
 
+$('#order-add input#bus_delivery').click(function (){
+    var price_delivery = $('input#price_delivery');
+    var price_delivery_val = +price_delivery.val();
+    console.log(price_delivery_val);
+    if(this.checked){
+        price_delivery.attr('disabled', true);
+        price_delivery.val(0);
+        $('input#price_summary').val(+$('input#price_flowers').val());
+    }else {
+        price_delivery.attr('disabled', false);
+        price_delivery.val(price_delivery_val);
+        $('input#price_summary').val(+$('input#price_flowers').val()+price_delivery_val);
+    }
+    console.log(price_delivery_val);
+});
+
 $('#order-add table tr td #payment, #order-add table tr td #departure').click(function () {/*открытие текущей даты оплаты заказа и скрытие по значению чекбокса*/
     var date = new Date();
     var dateVaules = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + 'T' + date.getHours() + ':' + date.getMinutes();
@@ -54,10 +70,10 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
     }
 });
 
-$('body').on('keyup', '#order-add input#price_flowers, #order-add input#price_delivery, #order-add input#price_summary',function () {/*суммируем стоимость в форме*/
-    var price_flowers = $('#order-add input#price_flowers');
-    var price_delivery = $('#order-add input#price_delivery');
-    var price_summary = $('#order-add input#price_summary');
+$('body').on('keyup', 'input#price_flowers, input#price_delivery, input#price_summary',function () {/*суммируем стоимость в форме*/
+    var price_flowers = $('input#price_flowers');
+    var price_delivery = $('input#price_delivery');
+    var price_summary = $('input#price_summary');
     if ($(this).attr('id') == 'price_flowers' || $(this).attr('id') == 'price_delivery') {
         price_summary.val(+price_flowers.val() + +price_delivery.val());
     } else {

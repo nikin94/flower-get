@@ -26,7 +26,9 @@
         </tr>
         <tr class="price_delivery">
             <td><label for="price_delivery">Стоимость доставки</label></td>
-            <td> <input name="price_delivery" id="price_delivery" type="number" value="350"></td>
+            <td><input name="price_delivery" id="price_delivery" type="number" value="350">
+                <input name="bus_delivery" id="bus_delivery" type="checkbox"><label for="bus_delivery">Доставка автобусом:</label>
+            </td>
         </tr>
         <tr class="price_summary">
             <td><label for="price_summary">Итого </label></td>

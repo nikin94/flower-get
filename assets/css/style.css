@@ -117,6 +117,18 @@ header nav ul li a:hover{
     height: 30px;
     display: block;
 }
+#order-add input#price_delivery{
+    margin-bottom: 5px;
+}
+#order-add input#bus_delivery{
+    width: auto;
+    float: right;
+    margin: 3px 10px;
+}
+#order-add label[for="bus_delivery"]{
+    float: right;
+}
+
 .payment-img{
     width: 50px;
     height: 50px;

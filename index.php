@@ -15,7 +15,7 @@ require_once('functions.php');
 if (isset($_GET['list'])){/*$_SERVER['REQUEST_URI']*/
     require_once("order-list.php");
 }elseif (isset($_GET['add'])){
-    require_once("order-form.php");
+    require_once("order-add-form.php");
 }
 ?>
 
