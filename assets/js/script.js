@@ -40,7 +40,12 @@ $('#order-list td.remove-order').on('click', function () {/*confirm и удал�
     }
 });
 
-$('#order-add input#bus_delivery').click(function (){
+$('body').on('click', '.bank-logo', function () {/*Выбор банка*/
+    $('.bank-logo input').removeAttr('checked').parent().removeClass('checked');
+    $(this).addClass('checked').find('input').prop('checked',true);
+});
+
+$('body').on('click', 'input#bus_delivery', function (){/*Отправка автобусом*/
     var price_delivery = $('input#price_delivery');
     if(this.checked){
         price_delivery.attr('disabled', true);
@@ -164,10 +169,13 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
         'address': this_tr.find('td.td-address input#address').val(),
         'phone': this_tr.find('td.td-address input#phone').val(),
         'list_flowers': this_tr.find('td.td-list_flowers textarea#list_flowers').val(),
+        'price_bank': this_tr.find('td.td-price_bank input[name="price_bank"]:checked').val(),
         'price_flowers': +this_tr.find('td.td-price_flowers input#price_flowers').val(),
         'price_delivery': +this_tr.find('td.td-price_delivery input#price_delivery').val(),
+        'bus_delivery': this_tr.find('td.td-price_delivery input#bus_delivery').is(':checked') ? 1 : 0,
         'price_summary': +this_tr.find('td.td-price_summary input#price_summary').val()
     }).done(function (result) {
+        console.log(result);
         window.location.replace("/flowers/?list=" + thisID);
     });
 });

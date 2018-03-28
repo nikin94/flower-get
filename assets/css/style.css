@@ -128,10 +128,38 @@ header nav ul li a:hover{
 #order-add label[for="bus_delivery"]{
     float: right;
 }
-
-.payment-img{
+#order-add .bank-logo{
+    width: 32%;
+    height: 100px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+#order-add .bank-logo img{
+    height: 80%;
+    width: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+#order-add .bank-logo input{
+    display: none;
+}
+#order-add .bank-logo.checked{
+    background-color: rgba(44, 117, 13, 0.5);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.payment-img,
+.bus-img{
     width: 50px;
     height: 50px;
+}
+.payment-img{
     cursor: pointer;
 }
 
@@ -190,6 +218,9 @@ th img.th-icon{
     position: relative;
     display: inline-block;
 }
+th.th-price_bank{
+    width: 100px;
+}
 td.edit-order img.img-save{
     width: 50px;
 }
@@ -224,6 +255,9 @@ td.td-date_departure span.send-text{
     bottom: 20px;
     z-index: 1;
     cursor: pointer;
+}
+td.td-price_bank img{
+    width: 65px;
 }
 
 .th-name,

@@ -15,8 +15,16 @@ $arrayData = $tmp[0];
     <td class="td-address"><label>Адрес<input id="address" value="<?=htmlentities($arrayData['address'])?>"></label><br><?="<label>Телефон<input id='phone' value='".($arrayData['phone'] != 0 && $arrayData['phone'] != -1 ? htmlentities($arrayData['phone']) : '')."'></label>";
         ?></td>
     <td class="td-list_flowers"><textarea id="list_flowers"><?=htmlentities($arrayData['list_flowers'])?></textarea></td>
+    <td class="td-price_bank">
+        <label>Тинькофф<input type="radio" name="price_bank" value="tinkoff" <?=$arrayData['price_bank']=='tinkoff'? 'checked="checked"' : ''?>></label><br />
+        <label>РНКБ<input type="radio" name="price_bank" value="rncb" <?=$arrayData['price_bank']=='rncb'? 'checked="checked"' : ''?>></label><br />
+        <label>Сбербанк<input type="radio" name="price_bank" value="sberbank" <?=$arrayData['price_bank']=='sberbank'? 'checked="checked"' : ''?>></label>
+    </td>
     <td class="td-price_flowers"><input id="price_flowers" type="number" value="<?=htmlentities($arrayData['price_flowers'])?>"></td>
-    <td class="td-price_delivery"><input id="price_delivery" type="number" value="<?=htmlentities($arrayData['price_delivery'])?>"></td>
+    <td class="td-price_delivery">
+        <input id="price_delivery" type="number" value="<?=htmlentities($arrayData['price_delivery'])?>" <?=$arrayData['bus_delivery'] ? 'disabled' : ''?>>
+        <input id="bus_delivery" type="checkbox" <?=$arrayData['bus_delivery'] ? 'checked="checked"':''?>">
+    </td>
     <td class="td-price_summary"><input id="price_summary" type="number" value="<?=htmlentities($arrayData['price_summary'])?>"></td>
     <td class="td-date_create"><?=convertDateFormat(htmlentities($arrayData['date_create']))?></td>
     <td class="td-payment"><?php

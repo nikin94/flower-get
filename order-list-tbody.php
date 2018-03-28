@@ -8,8 +8,27 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY id DESC"
         <td class="td-name"><?=htmlentities($item['name'])?></td>
         <td class="td-address"><?=htmlentities($item['address']).(isset($item['phone']) && $item['phone'] != -1 ? ",<br>".htmlentities($item['phone']) : '')?></td>
         <td class="td-list_flowers"><?=printFlowersList(htmlentities($item['list_flowers']))?></td>
+        <td class="td-price_bank"><?php
+            switch ($item['price_bank']) {
+                case 'tinkoff':
+                    echo "<img src=\"assets/img/icons/bank/tinkoff.png\" alt=\"Tinkoff\">";
+                    break;
+                case 'rncb':
+                    echo "<img src=\"assets/img/icons/bank/rncb.jpg\" alt=\"RNCB\">";
+                    break;
+                case 'sberbank':
+                    echo "<img src=\"assets/img/icons/bank/sberbank.png\" alt=\"Sberbank\">";
+                    break;
+            }
+        ?></td>
         <td class="td-price_flowers"><?=htmlentities($item['price_flowers'])?></td>
-        <td class="td-price_delivery"><?=htmlentities($item['price_delivery'])?></td>
+        <td class="td-price_delivery"><?php
+            if(!(htmlentities($item['price_delivery']) == 0 && $item['bus_delivery'])){
+                echo htmlentities($item['price_delivery']);
+            }else{
+                echo '<img class="bus-img" src="assets/img/icons/bus.png">';
+            }
+            ?></td>
         <td class="td-price_summary"><?=htmlentities($item['price_summary'])?></td>
         <td class="td-date_create"><?=convertDateFormat(htmlentities($item['date_create']))?></td>
         <td class="td-payment"><?php

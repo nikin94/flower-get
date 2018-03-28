@@ -13,42 +13,60 @@
             <td><input name="address" id="address" type="text" required></td>
         </tr>
         <tr class="phone">
-            <td> <label for="phone">Телефон</label></td>
-            <td> <input name="phone" id="phone" type="text"></td>
+            <td><label for="phone">Телефон</label></td>
+            <td><input name="phone" id="phone" type="text"></td>
         </tr>
         <tr class="list_flowers">
-            <td> <label for="list_flowers">Содержимое заказа</label></td>
-            <td> <textarea name="list_flowers" id="list_flowers" required></textarea></td>
+            <td><label for="list_flowers">Содержимое заказа</label></td>
+            <td><textarea name="list_flowers" id="list_flowers" required></textarea></td>
+        </tr>
+        <tr class="price_bank">
+            <td><label for="price_bank">Способ оплаты</label></td>
+            <td>
+                <div class="bank-logo bank-tinkoff checked">
+                    <input name="price_bank" class="radio-bank" value="tinkoff" id="price_bank_tinkoff" type="radio" checked>
+                    <img src="assets/img/icons/bank/tinkoff.png" alt="Tinkoff">
+                </div>
+                <div class="bank-logo bank-rncb">
+                    <input name="price_bank" class="radio-bank" value="rncb" id="price_bank_rncb" type="radio">
+                    <img src="assets/img/icons/bank/rncb.jpg" alt="RNCB">
+                </div>
+                <div class="bank-logo bank-sberbank">
+                    <input name="price_bank" class="radio-bank" value="sberbank" id="price_bank_sberbank" type="radio">
+                    <img src="assets/img/icons/bank/sberbank.png" alt="Sberbank">
+                </div>
+            </td>
         </tr>
         <tr class="price_flowers">
-            <td> <label for="price_flowers">Стоимость заказа</label></td>
-            <td> <input name="price_flowers" id="price_flowers" type="number"></td>
+            <td><label for="price_flowers">Стоимость заказа</label></td>
+            <td><input name="price_flowers" id="price_flowers" type="number"></td>
         </tr>
         <tr class="price_delivery">
             <td><label for="price_delivery">Стоимость доставки</label></td>
             <td><input name="price_delivery" id="price_delivery" type="number" value="350">
-                <input name="bus_delivery" id="bus_delivery" type="checkbox"><label for="bus_delivery">Доставка автобусом:</label>
+                <input name="bus_delivery" id="bus_delivery" type="checkbox"><label for="bus_delivery">Доставка
+                    автобусом:</label>
             </td>
         </tr>
         <tr class="price_summary">
             <td><label for="price_summary">Итого </label></td>
-            <td> <input name="price_summary" id="price_summary" type="number"></td>
+            <td><input name="price_summary" id="price_summary" type="number"></td>
         </tr>
         <tr class="payment">
             <td><label for="payment">Оплачен</label></td>
             <td><input name="payment" id="payment" type="checkbox"></td>
         </tr>
         <tr class="date_payment" style="display: none;">
-            <td> <label for="date_payment">Дата оплаты </label></td>
-            <td> <input name="date_payment" id="date_payment" type="datetime-local"></td>
+            <td><label for="date_payment">Дата оплаты </label></td>
+            <td><input name="date_payment" id="date_payment" type="datetime-local"></td>
         </tr>
         <tr class="departure">
             <td><label for="departure">Отправлен</label></td>
             <td><input name="departure" id="departure" type="checkbox"></td>
         </tr>
         <tr class="date_departure" style="display: none;">
-            <td> <label for="date_departure">Дата отправки</label></td>
-            <td> <input name="date_departure" id="date_departure" type="datetime-local" value=""></td>
+            <td><label for="date_departure">Дата отправки</label></td>
+            <td><input name="date_departure" id="date_departure" type="datetime-local" value=""></td>
         </tr>
     </table>
     <button>Добавить заказ</button>

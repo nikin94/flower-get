@@ -25,8 +25,9 @@ foreach ($arrayData as $key => $item) {/*добавление данных в sq
     }
 }
 $sql = rtrim(trim($sql),",");/*Убираем запятую и пробелы в конце(и начале) строки*/
+//echo $arrayData['price_flowers'];
 if (isset($arrayData['id'])) {
     $sql = "UPDATE orders SET $sql WHERE id = $id";
     echo $dbClass->queryUPDATE($sql) ? '{"TYPE":"OK","MESSAGE":"Запись обновлена"}' : '{"TYPE":"ERROR","MESSAGE":"Ошибка!"}';
 }
-echo mysqli_error($dbClass->getDB());
+//echo mysqli_error($dbClass->getDB());
