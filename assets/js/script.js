@@ -9,6 +9,10 @@ function getUrlParameter(sParam) {/*Вернёт значение из get-за�
     }
 }
 
+function calcPriceSummary() {/*Ставим итоговую стоимость*/
+    $('input#price_summary').val(+$('input#price_flowers').val() + +$('input#price_delivery').val());
+    // $('input#price_flowers, input#price_delivery,input#price_summary').trigger('change');
+}
 
 if (getUrlParameter('list') !== true) {/*Отмечаем затухающим зеленым цветом отредактированную строку и сносим _GET в url*/
     $('#order-list .td-id').each(function () {
@@ -40,9 +44,10 @@ $('#order-list td.remove-order').on('click', function () {/*confirm и удал�
     }
 });
 
-$('body').on('click', '.bank-logo', function () {/*Выбор банка*/
-    $('.bank-logo input').removeAttr('checked').parent().removeClass('checked');
-    $(this).addClass('checked').find('input').prop('checked',true);
+$('body').on('click', '.bank-logo, .bank-logo-update', function () {/*Выбор банка*/
+    $('.bank-logo').removeClass('checked');
+    $('.bank-logo-update').removeClass('checked');
+    $(this).addClass('checked');
 });
 
 $('body').on('click', 'input#bus_delivery', function (){/*Отправка автобусом*/
@@ -51,10 +56,12 @@ $('body').on('click', 'input#bus_delivery', function (){/*Отправка ав�
         price_delivery.attr('disabled', true);
         price_delivery.val(0);
         $('input#price_summary').val(+$('input#price_flowers').val());
+        $(this).next().attr('src','assets/img/icons/bus.png');
     }else {
         price_delivery.attr('disabled', false);
         price_delivery.val(350);
         $('input#price_summary').val(+$('input#price_flowers').val()+350);
+        $(this).next().attr('src','assets/img/icons/bus_no.png');
     }
 });
 
@@ -73,45 +80,67 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
     }
 });
 
-$('body').on('keyup', 'input#price_flowers, input#price_delivery, input#price_summary',function () {/*суммируем стоимость в форме*/
-    var price_flowers = $('input#price_flowers');
-    var price_delivery = $('input#price_delivery');
-    var price_summary = $('input#price_summary');
-    if ($(this).attr('id') == 'price_flowers' || $(this).attr('id') == 'price_delivery') {
-        price_summary.val(+price_flowers.val() + +price_delivery.val());
-    } else {
-        if (price_summary.val() - price_delivery.val() > 0) {
-            price_flowers.val(+price_summary.val() - +price_delivery.val());
-        } else {
-            price_flowers.val(0);
-        }
+$('body').on('focusout', '#list_flowers', function () {/*Суммируем стоимости цветов из списка*/
+    var current_values = ($('#list_flowers').val()).split(',');
+    var prices = [];
+    for (i in current_values) {
+        var _this = current_values[i];
+        _this = $.trim(current_values[i]);
+        _this = _this.split(' ');
+        prices.push(_this.pop());
+        _this = _this.join(' ');
     }
+    var summ = prices.reduce(function(a, b){
+        return +a + +b;
+    }, 0);
+    $('#price_flowers').val(summ);
+    calcPriceSummary();
 });
+
+$('body').on('keyup', 'input#price_flowers, input#price_delivery', calcPriceSummary);
 
 $('body').on('click', '#order-list img.payment-img', function () {/*КНОПКА ОПЛАТЫ*/
     var _this = $(this).closest('td.td-payment');
-    var thisID = _this.closest('tr').find('td:first-child').text();
-    var date = new Date();
-    var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
-    var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-    var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-    var dateValuesSQL = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + ' ' + hours + ':' + minutes + ':' + seconds;
-    var dateValuesNormal = ("0" + date.getDate()).slice(-2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
-    if (_this.find('img.payment-img').hasClass('payment-img-no')) {
-        $.post('order-update.php', {
-            'id': thisID,
-            'payment': 1,
-            'date_payment': dateValuesSQL
-        }).done(function () {
-            _this.html('<div class="tooltip"><img class="payment-img payment-img-yes" src="assets/img/icons/yes.png"><span class="tooltiptext">' + dateValuesNormal + '</span></div>');
+    if(!$('#payment_part').hasClass('checked')) {
+        var thisID = _this.closest('tr').find('td:first-child').text();
+        var date = new Date();
+        var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+        var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+        var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+        var dateValuesSQL = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + ' ' + hours + ':' + minutes + ':' + seconds;
+        var dateValuesNormal = ("0" + date.getDate()).slice(-2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + hours + ':' + minutes;
+        if (_this.find('img.payment-img').hasClass('payment-img-no') || _this.find('img.payment-img').hasClass('payment-img-part')) {
+            $.post('order-update.php', {
+                'id': thisID,
+                'payment': 1,
+                'payment_part': 0,
+                'date_payment': dateValuesSQL
+            }).done(function () {
+                _this.html('<div class="tooltip"><img class="payment-img payment-img-yes" src="assets/img/icons/yes.png"><span class="tooltiptext">' + dateValuesNormal + '</span></div>');
+            });
+        } else if (_this.find('img.payment-img').hasClass('payment-img-yes') && confirm('Отметить заказ, как НЕ оплаченный?')) {
+            $.post('order-update.php', {
+                'id': thisID,
+                'payment': 0,
+                'date_payment': null
+            }).done(function (result) {
+                _this.html('<img class="payment-img payment-img-no" src="assets/img/icons/no.png">');
+            });
+        }
+    }
+});
+$('body').on('click', '#order-list .payment_part', function () {/*ЧАСТИЧНАЯ ОПЛАТА*/
+    if (!$(this).find('input').hasClass('checked') && !$(this).find('input').prop('checked') && confirm('Заказ частично оплачен?')) {
+        var _this = $(this);
+        _this.closest('td').find('span.tooltiptext').remove();
+        _this.find('input').addClass('checked');
+        _this.find('img').css({
+            webkitFilter: 'grayscale(0%)',
+            filter: 'grayscale(0%)'
         });
-    } else if (_this.find('img.payment-img').hasClass('payment-img-yes') && confirm('Отметить заказ, как НЕ оплаченный?')) {
-        $.post('order-update.php', {
-            'id': thisID,
-            'payment': 0,
-            'date_payment': null
-        }).done(function (result) {
-            _this.html('<img class="payment-img payment-img-no" src="assets/img/icons/no.png">');
+        _this.closest('.td-payment').find('.payment-img').css({
+            webkitFilter: 'grayscale(100%)',
+            filter: 'grayscale(100%)'
         });
     }
 });
@@ -163,6 +192,7 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
     var this_td = $(this).closest('td');
     var this_tr = $(this).closest('tr');
     var thisID = this_tr.find('td:first-child').text();
+    var payment_part = (this_tr.find('.td-payment img').hasClass('payment-img-part') ? 1 : 0) || (this_tr.find('#payment_part').hasClass('checked') ? 1 : 0);
     $.post('order-update.php', {
         'id': thisID,
         'name': this_tr.find('td.td-name input#name').val(),
@@ -173,6 +203,7 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
         'price_flowers': +this_tr.find('td.td-price_flowers input#price_flowers').val(),
         'price_delivery': +this_tr.find('td.td-price_delivery input#price_delivery').val(),
         'bus_delivery': this_tr.find('td.td-price_delivery input#bus_delivery').is(':checked') ? 1 : 0,
+        'payment_part': payment_part,
         'price_summary': +this_tr.find('td.td-price_summary input#price_summary').val()
     }).done(function (result) {
         window.location.replace("/flowers/?list=" + thisID);

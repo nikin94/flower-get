@@ -24,16 +24,24 @@
             <td><label for="price_bank">Способ оплаты</label></td>
             <td>
                 <div class="bank-logo bank-tinkoff checked">
-                    <input name="price_bank" class="radio-bank" value="tinkoff" id="price_bank_tinkoff" type="radio" checked>
-                    <img src="assets/img/icons/bank/tinkoff.png" alt="Tinkoff">
+                    <label>
+                        <input name="price_bank" class="radio-bank" value="tinkoff" id="price_bank_tinkoff" type="radio"
+                               checked>
+                        <img src="assets/img/icons/bank/tinkoff.png" alt="Tinkoff">
+                    </label>
                 </div>
                 <div class="bank-logo bank-rncb">
-                    <input name="price_bank" class="radio-bank" value="rncb" id="price_bank_rncb" type="radio">
-                    <img src="assets/img/icons/bank/rncb.jpg" alt="RNCB">
+                    <label>
+                        <input name="price_bank" class="radio-bank" value="rncb" id="price_bank_rncb" type="radio">
+                        <img src="assets/img/icons/bank/rncb.jpg" alt="RNCB">
+                    </label>
                 </div>
                 <div class="bank-logo bank-sberbank">
-                    <input name="price_bank" class="radio-bank" value="sberbank" id="price_bank_sberbank" type="radio">
-                    <img src="assets/img/icons/bank/sberbank.png" alt="Sberbank">
+                    <label>
+                        <input name="price_bank" class="radio-bank" value="sberbank" id="price_bank_sberbank"
+                               type="radio">
+                        <img src="assets/img/icons/bank/sberbank.png" alt="Sberbank">
+                    </label>
                 </div>
             </td>
         </tr>
@@ -44,8 +52,13 @@
         <tr class="price_delivery">
             <td><label for="price_delivery">Стоимость доставки</label></td>
             <td><input name="price_delivery" id="price_delivery" type="number" value="350">
-                <input name="bus_delivery" id="bus_delivery" type="checkbox"><label for="bus_delivery">Доставка
-                    автобусом:</label>
+                <div class="tooltip inline-block">
+                    <label class="bus-icon">
+                        <span class="tooltiptext">Отправка автобусом</span>
+                        <input name="bus_delivery" id="bus_delivery" type="checkbox">
+                        <img src="assets/img/icons/bus_no.png" alt="bus">
+                    </label>
+                </div>
             </td>
         </tr>
         <tr class="price_summary">

@@ -31,8 +31,10 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY id DESC"
             ?></td>
         <td class="td-price_summary"><?=htmlentities($item['price_summary'])?></td>
         <td class="td-date_create"><?=convertDateFormat(htmlentities($item['date_create']))?></td>
-        <td class="td-payment"><?php
-            if(!htmlentities($item['payment'])){
+        <td class="td-payment "><?php
+            if(htmlentities($item['payment_part'])){
+                echo '<img class="payment-img payment-img-part" src="assets/img/icons/part.png">';
+            }elseif(!htmlentities($item['payment'])){
                 echo '<img class="payment-img payment-img-no" src="assets/img/icons/no.png">';
             }else{
                 echo '<div class="tooltip"><img class="payment-img payment-img-yes" src="assets/img/icons/yes.png"><span class="tooltiptext">'.convertDateFormat(htmlentities($item['date_payment'])).'</span></div>';

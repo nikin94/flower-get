@@ -11,6 +11,9 @@ body *{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+.inline-block{
+    display: inline-block;
+}
 
 header nav{
     height: 50px;
@@ -46,25 +49,6 @@ header nav ul li a {
 header nav ul li a:hover{
     font-size: 19px;
     color: #000;
-}
-
-#order-list{
-    max-width: 94vw;
-    border-collapse: collapse;
-    text-align: center;
-    background-color: rgba(255,255,255,.9);
-    margin: 20px auto;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-}
-
-#order-list td,
-#order-list th{
-    position: relative;
-    border-bottom: 1px solid rgba(0,0,0,.2);
-    padding: 5px;
-    vertical-align: middle;
 }
 
 #order-add {
@@ -117,25 +101,56 @@ header nav ul li a:hover{
     height: 30px;
     display: block;
 }
-#order-add input#price_delivery{
-    margin-bottom: 5px;
+#order-add tr.price_delivery{
+    height: 80px;
 }
-#order-add input#bus_delivery{
+#order-add input#price_delivery{
+    margin-right: 30px;
+    margin-bottom: 5px;
+    width: 60%;
+}
+#order-update-form input#price_delivery{
+    margin-bottom: 30px;
+}
+#order-add input#bus_delivery,
+#order-update-form input#bus_delivery{
+    display: none;
     width: auto;
     float: right;
     margin: 3px 10px;
 }
+#order-add .bus-icon,
+#order-update-form .bus-icon{
+    width: 70px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+#order-add .bus-icon img,
+#order-update-form .bus-icon img{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+
 #order-add label[for="bus_delivery"]{
     float: right;
 }
-#order-add .bank-logo{
+#order-add .bank-logo,
+#order-update-form .bank-logo{
     width: 32%;
     height: 100px;
     display: inline-block;
     position: relative;
     cursor: pointer;
 }
-#order-add .bank-logo img{
+#order-add .bank-logo img,
+#order-update-form .bank-logo img{
     height: 80%;
     width: auto;
     position: absolute;
@@ -144,23 +159,65 @@ header nav ul li a:hover{
     bottom: 0;
     top: 0;
     margin: auto;
+    cursor: pointer;
 }
-#order-add .bank-logo input{
+#order-add .bank-logo input,
+#order-update-form .bank-logo input{
     display: none;
 }
-#order-add .bank-logo.checked{
+#order-add .bank-logo.checked,
+#order-update-form .bank-logo.checked{
     background-color: rgba(44, 117, 13, 0.5);
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
+#order-update-form .payment_part{
+    position: relative;
+    top: 50px;
+    height: 30px;
+    display: block;
+    cursor: pointer;
+}
+#order-update-form .payment_part input{
+    display: none;
+}
+#order-update-form .payment_part img{
+    height: 100%;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
 .payment-img,
 .bus-img{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
 }
 .payment-img{
     cursor: pointer;
+}
+
+#order-list{
+    max-width: 94vw;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: rgba(255,255,255,.9);
+    margin: 20px auto;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#order-list td,
+#order-list th{
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    padding: 10px 5px;
+    vertical-align: middle;
 }
 
 #order-list thead tr:first-child{
@@ -248,16 +305,33 @@ td.td-date_departure img.send-img{
     cursor: pointer;
 }
 td.td-date_departure span.send-text{
+    text-transform: uppercase;
+    box-shadow: 0 8px 17px 6px white;
     font-weight: 600;
     white-space: nowrap;
     display: block;
     height: 0;
+    width: 120px;
     bottom: 20px;
     z-index: 1;
     cursor: pointer;
 }
 td.td-price_bank img{
     width: 65px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+#order-list td.td-price_bank input[name="price_bank"]{
+    display: none;
+}
+#order-update-form .bank-logo{
+    height: 70px;
+    width: auto;
+    display: block;
 }
 
 .th-name,
