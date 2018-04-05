@@ -19,7 +19,7 @@ if (getUrlParameter('list') !== true) {/*Отмечаем затухающим �
         if ($(this).text() == getUrlParameter("list")) {
             //console.log($(this).css());
             $(this).closest('tr').css({backgroundColor: '#82ff7b'});
-            $(this).closest('tr').stop().animate({backgroundColor: 'transparent'}, 2000, function () {
+            $(this).closest('tr').stop().animate({backgroundColor: 'transparent'}, 3000, function () {
                 window.history.pushState({}, "Hide", "/flowers/?list");
             });
         }
@@ -84,11 +84,16 @@ $('body').on('focusout', '#list_flowers', function () {/*Суммируем ст
     var current_values = ($('#list_flowers').val()).split(',');
     var prices = [];
     for (i in current_values) {
-        var _this = current_values[i];
-        _this = $.trim(current_values[i]);
-        _this = _this.split(' ');
-        prices.push(_this.pop());
-        _this = _this.join(' ');
+        if(current_values[i]){
+            var _this = current_values[i];
+            _this = ($.trim(_this)).split(' ');
+            var last = parseInt(_this.pop());
+            if(isNaN(last)){
+                last = parseInt(_this.pop());
+            }
+            prices.push(last);
+            _this = _this.join(' ');
+        }
     }
     var summ = prices.reduce(function(a, b){
         return +a + +b;
@@ -157,6 +162,7 @@ $('body').on('click', '#order-list .td-date_departure .send-YES, #order-list .td
     if (_this.hasClass('send-NO')) {
         $.post('order-update.php', {
             'id': thisID,
+            'departure': 1,
             'date_departure': dateValuesSQL
         }).done(function (result) {
             _this.parent().html('<div class="send-YES tooltip"><span class="send-text">Отправлен</span><img class="send-img" src="assets/img/icons/send_success.png"><span class="tooltiptext">' + dateValuesNormal + '</span></div>');
@@ -164,6 +170,7 @@ $('body').on('click', '#order-list .td-date_departure .send-YES, #order-list .td
     } else if (_this.hasClass('send-YES') && confirm('Отметить заказ, как НЕ отправленный?')) {
         $.post('order-update.php', {
             'id': thisID,
+            'departure': 0,
             'date_departure': '0000-00-00 00:00:00'
         }).done(function (result) {
             _this.parent().html('<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>');

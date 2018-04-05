@@ -11,6 +11,7 @@ $arrayData = $tmp[0];
 
 <tr id="order-update-form">
     <td class="td-id"><?=$id?></td>
+    <td class="td-date_create"><?=convertDateFormat(htmlentities($arrayData['date_create']))?></td>
     <td class="td-name"><input id="name" value="<?=$arrayData['name']?>"></td>
     <td class="td-address"><label>Адрес<input id="address" value="<?=htmlentities($arrayData['address'])?>"></label><br><?="<label>Телефон<input id='phone' value='".($arrayData['phone'] != 0 && $arrayData['phone'] != -1 ? htmlentities($arrayData['phone']) : '')."'></label>";
         ?></td>
@@ -35,7 +36,6 @@ $arrayData = $tmp[0];
         </label>
     </td>
     <td class="td-price_summary"><input id="price_summary" type="number" value="<?=htmlentities($arrayData['price_summary'])?>"></td>
-    <td class="td-date_create"><?=convertDateFormat(htmlentities($arrayData['date_create']))?></td>
     <td class="td-payment"><?php
         if(htmlentities($arrayData['payment_part'])){
             echo '<img class="payment-img payment-img-part" src="assets/img/icons/part.png">';

@@ -17,7 +17,10 @@ function convertDateFormat($datetime){/*дату вида (yyyy-mm-dd hh:mm:ss) 
 function printFlowersList($str){/*В список цветов вместо запятых вставляем переносы*/
     $arrayFlowers = explode(',',$str);
     foreach ($arrayFlowers as $item){
-        echo $item."<br>";
+        echo trim($item)."<br>";
     }
 }
 
+function sortNormal($a,$b){
+
+}
