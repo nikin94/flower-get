@@ -11,7 +11,6 @@ function getUrlParameter(sParam) {/*Вернёт значение из get-за�
 
 function calcPriceSummary() {/*Ставим итоговую стоимость*/
     $('input#price_summary').val(+$('input#price_flowers').val() + +$('input#price_delivery').val());
-    // $('input#price_flowers, input#price_delivery,input#price_summary').trigger('change');
 }
 
 if (getUrlParameter('list') !== true) {/*Отмечаем затухающим зеленым цветом отредактированную строку и сносим _GET в url*/

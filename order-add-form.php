@@ -84,5 +84,37 @@
     </table>
     <button>Добавить заказ</button>
 </form>
+<div class="order-add-list">
+    <table>
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Стоимость</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>gagadfgad</td>
+                <td>5145</td>
+            </tr>
+            <tr>
+                <td>рпрыапр пры</td>
+                <td>511</td>
+            </tr>
+            <tr>
+                <td>gagad fgad</td>
+                <td>5161</td>
+            </tr>
+            <tr>
+                <td>рнлйцапияп</td>
+                <td>2222</td>
+            </tr>
+            <tr>
+                <td>Итого:</td>
+                <td>12345</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
