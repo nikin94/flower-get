@@ -61,7 +61,46 @@ header nav ul li a:hover{
     border-radius: 10px;
 }
 
+#order-add tr.name td:last-child{
+    position: relative;
+}
+
+#order-add .names{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 75%;
+    width: 90%;
+    padding: 10px;
+    background-color: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 6px 0 black;
+    -moz-box-shadow: 0 0 6px 0 black;
+    box-shadow: 0 0 6px 0 black;
+}
+#order-add .names .names-item:not(:last-child){
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+#order-add .names .names-item{
+    cursor: pointer;
+    text-transform: uppercase;
+    line-height: 150%;
+    text-align: center;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+}
+#order-add .names .names-item:hover{
+    background-color: rgba(44, 117, 13, 0.2);
+}
 .order-add-list{
+    display: none;
     font-size: 18px;
     background-color: rgba(255,255,255,.85);
     padding: 10px;

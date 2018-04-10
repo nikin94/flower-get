@@ -79,9 +79,12 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
     }
 });
 
-$('body').on('focusout', '#list_flowers', function () {/*Суммируем стоимости цветов из списка*/
-    var current_values = ($('#list_flowers').val()).split(',');
+$('body').on('focusout', '#list_flowers', function () {/*Суммируем стоимости цветов из списка и выводим их в таблице*/
+    var current_values = ($('#list_flowers').val()).split(/,|;/);
     var prices = [];
+    $('.order-add-list tbody tr').each(function () {
+        $(this).remove();
+    });
     for (i in current_values) {
         if(current_values[i]){
             var _this = current_values[i];
@@ -92,13 +95,30 @@ $('body').on('focusout', '#list_flowers', function () {/*Суммируем ст
             }
             prices.push(last);
             _this = _this.join(' ');
+            var newTR = '<tr><td>'+_this+'</td><td>'+last+'</td></tr>';
+            $('.order-add-list tbody').append(newTR);
         }
     }
     var summ = prices.reduce(function(a, b){
         return +a + +b;
     }, 0);
+    if(summ){
+        $('.order-add-list').fadeIn(300);
+    }else {
+        $('.order-add-list').fadeOut(300);
+    }
+    $('.order-add-list tbody').append('<tr class="total"><td>Стоимость цветов:</td><td class="summ">'+summ+'</td></tr>');
     $('#price_flowers').val(summ);
     calcPriceSummary();
+});
+
+$('body').on('focusin keyup','input#name', function () {
+    var nameValue = $(this).val();
+    $.post('find-client.php', {
+        'nameValue': nameValue
+    }).done(function (result) {
+        console.log(result);
+    });
 });
 
 $('body').on('keyup', 'input#price_flowers, input#price_delivery', calcPriceSummary);

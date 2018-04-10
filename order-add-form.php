@@ -6,15 +6,24 @@
     <table>
         <tr class="name">
             <td><label for="name">Фамилия, имя клиента</label></td>
-            <td><input name="name" id="name" type="text" required></td>
+            <td>
+                <input name="name" id="name" autocomplete="off" type="text" required>
+                <div class="names">
+                    <div class="names-item">Витя</div>
+                    <div class="names-item">Иванова Елена</div>
+                    <div class="names-item">Какой-то человек</div>
+                    <div class="names-item">Тратата</div>
+                    <div class="names-item">Гоблин</div>
+                </div>
+            </td>
         </tr>
         <tr class="address">
             <td><label for="address">Адрес доставки</label></td>
-            <td><input name="address" id="address" type="text" required></td>
+            <td><input name="address" id="address" autocomplete="off" type="text" required></td>
         </tr>
         <tr class="phone">
             <td><label for="phone">Телефон</label></td>
-            <td><input name="phone" id="phone" type="text"></td>
+            <td><input name="phone" id="phone" autocomplete="off" type="text"></td>
         </tr>
         <tr class="list_flowers">
             <td><label for="list_flowers">Содержимое заказа</label></td>
@@ -93,26 +102,6 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>gagadfgad</td>
-                <td>5145</td>
-            </tr>
-            <tr>
-                <td>рпрыапр пры</td>
-                <td>511</td>
-            </tr>
-            <tr>
-                <td>gagad fgad</td>
-                <td>5161</td>
-            </tr>
-            <tr>
-                <td>рнлйцапияп</td>
-                <td>2222</td>
-            </tr>
-            <tr>
-                <td>Итого:</td>
-                <td>12345</td>
-            </tr>
         </tbody>
     </table>
 </div>
