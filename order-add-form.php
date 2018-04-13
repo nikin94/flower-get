@@ -8,12 +8,7 @@
             <td><label for="name">Фамилия, имя клиента</label></td>
             <td>
                 <input name="name" id="name" autocomplete="off" type="text" required>
-                <div class="names">
-                    <div class="names-item">Витя</div>
-                    <div class="names-item">Иванова Елена</div>
-                    <div class="names-item">Какой-то человек</div>
-                    <div class="names-item">Тратата</div>
-                    <div class="names-item">Гоблин</div>
+                <div class="names" style="display: none;">
                 </div>
             </td>
         </tr>

@@ -4,6 +4,12 @@ body{
     -webkit-background-size: cover;
     background-size: cover;
     line-height: 1.3;
+    text-align: center;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
 }
 
 body *{
@@ -52,7 +58,11 @@ header nav ul li a:hover{
 }
 
 #order-add {
+    display: inline-block;
+    vertical-align: middle;
     margin: 15px auto 0 auto;
+    position: relative;
+    /*right: 20%;*/
     width: 500px;
     background-color: rgba(255,255,255,.85);
     padding: 10px;
@@ -100,6 +110,7 @@ header nav ul li a:hover{
     background-color: rgba(44, 117, 13, 0.2);
 }
 .order-add-list{
+    vertical-align: middle;
     display: none;
     font-size: 18px;
     background-color: rgba(255,255,255,.85);
@@ -108,9 +119,6 @@ header nav ul li a:hover{
     -moz-border-radius: 10px;
     border-radius: 10px;
     width: 400px;
-    position: absolute;
-    top: 250px;
-    right: 150px;
 }
 
 .order-add-list td,

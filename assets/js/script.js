@@ -78,8 +78,7 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
         });
     }
 });
-
-$('body').on('focusout', '#list_flowers', function () {/*Суммируем стоимости цветов из списка и выводим их в таблице*/
+$('body').on('focusout keyup', '#list_flowers', function () {/*Суммируем стоимости цветов из списка и выводим их в таблице*/
     var current_values = ($('#list_flowers').val()).split(/,|;/);
     var prices = [];
     $('.order-add-list tbody tr').each(function () {
@@ -93,17 +92,19 @@ $('body').on('focusout', '#list_flowers', function () {/*Суммируем ст
             if(isNaN(last)){
                 last = parseInt(_this.pop());
             }
-            prices.push(last);
             _this = _this.join(' ');
             var newTR = '<tr><td>'+_this+'</td><td>'+last+'</td></tr>';
-            $('.order-add-list tbody').append(newTR);
+            if(!isNaN(last)){
+                prices.push(last);
+                $('.order-add-list tbody').append(newTR);
+            }
         }
     }
     var summ = prices.reduce(function(a, b){
         return +a + +b;
     }, 0);
     if(summ){
-        $('.order-add-list').fadeIn(300);
+        $('.order-add-list').fadeIn(300).css("display","inline-block");
     }else {
         $('.order-add-list').fadeOut(300);
     }
@@ -112,12 +113,52 @@ $('body').on('focusout', '#list_flowers', function () {/*Суммируем ст
     calcPriceSummary();
 });
 
-$('body').on('focusin keyup','input#name', function () {
-    var nameValue = $(this).val();
-    $.post('find-client.php', {
-        'nameValue': nameValue
+$('body').on('focusin keyup','input#name', function () {/*ВЫВОДИМ ИМЕНА КЛИЕНТОВ ПО СОВПАДЕНИЮ В БАЗЕ*/
+    var _this = $(this);
+    var nameValue = _this.val().toLowerCase();
+    $('.names').html('');
+    $.post('get-clients-list.php', {
+        'getNames': nameValue
+    }).done(function (namesArray) {
+        if(namesArray){
+            namesArray = namesArray.split('/');
+            !namesArray[namesArray.length-1] ? namesArray.pop() : false;
+            var outputArray = [];
+            $.each(namesArray, function(i, el){/*удаление дублей*/
+                if($.inArray(el, outputArray) === -1) outputArray.push(el);
+            });
+            for(var i in outputArray){
+                var current_element = '<div class="names-item">'+outputArray[i]+'</div>';
+                if(outputArray[i].toLowerCase().indexOf(nameValue) >= 0 && $('.names').length < 6){
+                    $('.names').append(current_element);
+                }
+            }
+            if($('.names').is(':empty')){
+                $('.names').slideUp(300);
+            }else{
+                $('.names').slideDown(300);
+            }
+        }else {
+            $('.names').slideUp(300);
+        }
+    });
+});
+
+$('body').on('click', '.names-item', function () {/*АВТОЗАПОЛНЕНИЕ ПОЛЕЙ ПО КЛИКУ НА КЛИЕНТА*/
+    var currentName = $(this).html();
+    $.post('get-clients-list.php',{
+        currentName: currentName
     }).done(function (result) {
-        console.log(result);
+        result = JSON.parse(result);
+        $('input#name').val(currentName);
+        $('input#address').val(result['address']);
+        $('input#phone').val(result['phone']);
+    });
+});
+
+$('body').on('focusout','input#name', function () {
+    $('.names').slideUp(300, function () {
+        $(this).html('');
     });
 });
 

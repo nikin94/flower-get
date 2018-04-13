@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-$arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY departure, date_departure DESC, payment DESC, payment_part, id DESC");
+$arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY departure, payment DESC, date_departure DESC, payment_part, id DESC");
 
 ?>
 <?php foreach ($arrayListOrders as $item):?>
