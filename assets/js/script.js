@@ -210,8 +210,8 @@ $('body').on('click', '#order-list .payment_part', function () {/*ЧАСТИЧН
     }
 });
 
-$('body').on('click', '#order-list .td-date_departure .send-YES, #order-list .td-date_departure .send-NO', function () {/*КНОПКА ОТПРАВКИ*/
-    var _this = $(this);
+$('body').on('click', '#order-list .td-date_departure .send-text, #order-list .td-date_departure .send-img', function () {/*КНОПКА ОТПРАВКИ*/
+    var _this = $(this).closest('div');
     var thisID = _this.closest('tr').find('td:first-child').text();
     var date = new Date();
     var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();

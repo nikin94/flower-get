@@ -6,6 +6,9 @@ class DataBaseConnection extends ConfigDB{
     public function __destruct(){mysqli_close($this->getConnect());}
     public function getConnect(){
         if($this->db) return $this->db;
+        if (mysqli_connect_error()) {
+            return ("Connection failed: " . mysqli_connect_error());
+        }
         return $this->db = mysqli_connect(
             $this->dbHost,
             $this->dbUser,
