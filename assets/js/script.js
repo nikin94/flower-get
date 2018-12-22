@@ -187,7 +187,7 @@ $('body').on('click', '#order-list img.payment-img', function () {/*КНОПКА
             $.post('order-update.php', {
                 'id': thisID,
                 'payment': 0,
-                'date_payment': null
+                'date_payment': 0
             }).done(function (result) {
                 _this.html('<img class="payment-img payment-img-no" src="assets/img/icons/no.png">');
             });
@@ -225,13 +225,23 @@ $('body').on('click', '#order-list .td-date_departure .send-text, #order-list .t
             'departure': 1,
             'date_departure': dateValuesSQL
         }).done(function (result) {
-            _this.parent().html('<div class="send-YES tooltip"><span class="send-text">Отправлен</span><img class="send-img" src="assets/img/icons/send_success.png"><span class="tooltiptext">' + dateValuesNormal + '</span></div>');
+            _this.parent().html(
+                '<div class="send-YES tooltip">' +
+                    '<span class="send-text">Отправлен</span>' +
+                    '<img class="send-img" src="assets/img/icons/send_success.png">' +
+                    '<span class="tooltiptext">' + dateValuesNormal + '</span>' +
+                '</div>' +
+                '<div class="tracking">' +
+                    '<input type="number" id="tracking_number" value="295000">' +
+                    '<button>Сохранить</button>' +
+                '</div>'
+            );
         });
     } else if (_this.hasClass('send-YES') && confirm('Отметить заказ, как НЕ отправленный?')) {
         $.post('order-update.php', {
             'id': thisID,
             'departure': 0,
-            'date_departure': '0000-00-00 00:00:00'
+            'date_departure': 0
         }).done(function (result) {
             _this.parent().html('<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>');
         });
