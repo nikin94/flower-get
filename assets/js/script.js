@@ -68,14 +68,30 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
     var date = new Date();
     var dateVaules = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + 'T' + date.getHours() + ':' + date.getMinutes();
     var _this = $(this);
+    var list = $(this).closest('tbody');
     if (this.checked) {
-        _this.closest('tr').next().find('input').val(dateVaules);
-        _this.closest('tr').next().fadeIn(400);
-
+        if($(this).closest('tr').hasClass('payment')){
+            list.find('.date_payment input').val(dateVaules);
+            list.find('.date_payment').fadeIn(400);
+        }else if($(this).closest('tr').hasClass('departure')){
+            list.find('.date_departure input').val(dateVaules);
+            list.find('.date_departure').fadeIn(400);
+            list.find('.tracking_number input').val('295000');
+            list.find('.tracking_number').fadeIn(400);
+        }
     } else {
-        _this.closest('tr').next().fadeOut(400, function () {
-            _this.closest('tr').next().find('input').val('');
-        });
+        if($(this).closest('tr').hasClass('payment')){
+            list.find('.date_payment').fadeOut(400, function () {
+                list.find('.date_payment input').val('');
+            });
+        }else if($(this).closest('tr').hasClass('departure')){
+            list.find('.date_departure').fadeOut(400, function () {
+                list.find('.date_departure input').val('');
+            });
+            list.find('.tracking_number').fadeOut(400, function () {
+                list.find('.tracking_number input').val('');
+            });
+        }
     }
 });
 $('body').on('focusout keyup', '#list_flowers', function () {/*Суммируем стоимости цветов из списка и выводим их в таблице*/
@@ -233,15 +249,16 @@ $('body').on('click', '#order-list .td-date_departure .send-text, #order-list .t
                 '</div>' +
                 '<div class="tracking">' +
                     '<input type="number" id="tracking_number" value="295000">' +
-                    '<button>Сохранить</button>' +
+                    '<button class="save">Сохранить</button>' +
                 '</div>'
             );
         });
-    } else if (_this.hasClass('send-YES') && confirm('Отметить заказ, как НЕ отправленный?')) {
+    } else if (_this.hasClass('send-YES') && confirm('Отметить заказ, как НЕ отправленный и удалить ТРЕК-номер?')) {
         $.post('order-update.php', {
             'id': thisID,
             'departure': 0,
-            'date_departure': 0
+            'date_departure': 0,
+            'tracking_number': 0
         }).done(function (result) {
             _this.parent().html('<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>');
         });
@@ -258,7 +275,23 @@ $('body').on('input','#tracking_number', function() {
         console.log(result);
     });
 });
-
+$('body').on('click', '.tracking button.save', function () {
+    var _this = $(this).closest('div.tracking');
+    var thisID = _this.closest('tr').find('td:first-child').text();
+    $.post('get-tracking-number.php',{
+        'id': +thisID
+    }).done(function (result) {
+        _this.html('<button class="tracking_number">'+result+'</button>');
+    });
+});
+$('body').on('click', '.tracking_number', function () {
+    var _this = $(this);
+    $(this).after('<input type="text" id="temp_input" value="'+_this.html()+'">');
+    var copyText = document.getElementById("temp_input");
+    copyText.select();
+    document.execCommand("copy");
+    $('#temp_input').remove();
+});
 $('body').on('click', 'td.edit-order .img-edit', function () {/*КНОПКА РЕДАКТИРОВАНИЯ*/
     var _this = $(this).closest('td');
     var thisID = _this.closest('tr').find('td:first-child').text();

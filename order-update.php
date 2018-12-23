@@ -4,7 +4,7 @@ require_once('assets/DB/DataBaseConnection.php');
 $arrayData = [];
 $sql = '';
 $id = +$_POST['id'];
-print_r($_POST);
+//print_r($_POST);
 /*
 $_POST = [
     'id'=> 2,
@@ -34,7 +34,7 @@ $sql = rtrim(trim($sql),",");/*Убираем запятую и пробелы �
 echo gettype ($arrayData["tracking_number"]);
 if (isset($arrayData['id'])) {
     $sql = "UPDATE orders SET $sql WHERE id = $id";
-    echo $sql."\n";
+//    echo $sql."\n";
     echo $dbClass->queryUPDATE($sql) ? '{"TYPE":"OK","MESSAGE":"Запись обновлена"}' : '{"TYPE":"ERROR","MESSAGE":"Ошибка!"}';
 }
 //echo mysqli_error($dbClass->getDB());

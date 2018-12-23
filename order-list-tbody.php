@@ -47,7 +47,11 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY departur
             } else {
                 echo '<div class="send-NO"><span class="send-text">Не отправлен</span><img class="send-img" src="assets/img/icons/send.png"></div>';
             }
-            ?></td>
+            if (htmlentities($item['tracking_number'])){
+                echo '<button class="tracking_number">'.$item['tracking_number'].'</button>';
+            }
+            ?>
+        </td>
         <td class="edit-order edit"><img class="img-edit" src="assets/img/icons/edit_.png" alt="Редактировать"></td>
         <td class="remove-order"><img src="assets/img/icons/remove-order_.png" alt="Удалить"></td>
     </tr>

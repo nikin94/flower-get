@@ -85,6 +85,10 @@
             <td><label for="date_departure">Дата отправки</label></td>
             <td><input name="date_departure" id="date_departure" type="datetime-local" value=""></td>
         </tr>
+        <tr class="tracking_number" style="display: none;">
+            <td><label for="tracking_number">Код посылки</label></td>
+            <td><input type="text" name="tracking_number" id="tracking_number" value=""></td>
+        </tr>
     </table>
     <button>Добавить заказ</button>
 </form>

@@ -461,7 +461,7 @@ td.td-date_departure img.send-img{
   padding: 3px;
   height: 25px;
 }
-.tracking button{
+.tracking button.save{
   width: 20%;
   text-indent: -9999px;
   display: inline-block;
@@ -473,7 +473,7 @@ td.td-date_departure img.send-img{
   background-color: transparent;
   outline: none;
 }
-.tracking button:after{
+.tracking button.save:after{
   content: '';
   display: block;
   position: absolute;
@@ -486,6 +486,12 @@ td.td-date_departure img.send-img{
   right: 0;
   bottom: 0;
   margin: auto;
+}
+.tracking_number{
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 5px;
+  cursor: copy;
 }
 td.td-date_departure img.send-img {
   max-width: 100%;
