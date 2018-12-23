@@ -248,6 +248,17 @@ $('body').on('click', '#order-list .td-date_departure .send-text, #order-list .t
     }
 });
 
+$('body').on('input','#tracking_number', function() {
+    var _this = $(this).closest('td');
+    var thisID = _this.closest('tr').find('td:first-child').text();
+    $.post('order-update.php', {
+        'id': thisID,
+        'tracking_number': +$(this).val()
+    }).done(function (result) {
+        console.log(result);
+    });
+});
+
 $('body').on('click', 'td.edit-order .img-edit', function () {/*КНОПКА РЕДАКТИРОВАНИЯ*/
     var _this = $(this).closest('td');
     var thisID = _this.closest('tr').find('td:first-child').text();

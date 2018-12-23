@@ -14,8 +14,12 @@ $_POST = [
     'date_payment' =>'',
     'date_departure' =>''
 ];*/
-foreach ($_POST as $key => $item) {/*переносим из POST в массив*/
-    $arrayData["$key"] = isset($_POST[$key]) ?  '\''.$_POST[$key].'\'' : '\'-1\'';
+foreach ($_POST as $key => $item) {/*переносим из POST в массив is_nan */
+    if(isset($_POST[$key])){
+        $arrayData["$key"] = '\''.$_POST[$key].'\'';
+    }else{
+        $arrayData["$key"] = '\'-1\'';
+    }
     if (mb_strpos($key, 'date_') === 0 && $item == 0) {
         $arrayData["$key"] = '\'0000-00-00 00:00:00\'';
     }
@@ -26,9 +30,11 @@ foreach ($arrayData as $key => $item) {/*добавление данных в sq
     }
 }
 $sql = rtrim(trim($sql),",");/*Убираем запятую и пробелы в конце(и начале) строки*/
-//echo $arrayData['price_flowers'];
+
+echo gettype ($arrayData["tracking_number"]);
 if (isset($arrayData['id'])) {
     $sql = "UPDATE orders SET $sql WHERE id = $id";
+    echo $sql."\n";
     echo $dbClass->queryUPDATE($sql) ? '{"TYPE":"OK","MESSAGE":"Запись обновлена"}' : '{"TYPE":"ERROR","MESSAGE":"Ошибка!"}';
 }
 //echo mysqli_error($dbClass->getDB());
