@@ -255,10 +255,15 @@ header nav ul li a:hover {
 
 #order-add .bus-icon,
 #order-update-form .bus-icon {
-  width: 70px;
   display: inline-block;
   position: relative;
   cursor: pointer;
+}
+#order-add .bus-icon{
+  width: 70px;
+}
+#order-update-form .bus-icon{
+  width: 100%;
 }
 
 #order-add .bus-icon img,
@@ -331,7 +336,7 @@ header nav ul li a:hover {
 
 .payment-img,
 .bus-img {
-  width: 60px;
+  width: 100%;
   position: absolute;
   left: 0;
   right: 0;
@@ -359,7 +364,7 @@ header nav ul li a:hover {
 #order-list th {
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
-  padding: 10px 5px;
+  padding: 5px;
   vertical-align: middle;
 }
 
@@ -392,7 +397,7 @@ header nav ul li a:hover {
   padding: 5px;
 }
 
-#order-list td textarea {
+#order-list textarea#list_flowers {
   max-width: 290px;
   min-width: 290px;
   width: 290px;
@@ -404,7 +409,18 @@ header nav ul li a:hover {
 .td-price_summary input {
   width: 75px;
 }
+#order-update-form .td-price_flowers input,
+#order-update-form .td-price_delivery input,
+#order-update-form .td-price_summary input {
+  width: 40px;
+  padding: 5px 0;
+  text-align: center;
+}
+#order-update-form .td-address input,
+#order-update-form .td-address textarea{
+  max-width: 150px;
 
+}
 .td-price_flowers {
   font-weight: 600;
   font-size: 18px;
@@ -418,8 +434,34 @@ header nav ul li a:hover {
   width: 300px;
 }
 
+.td-list_flowers ul li[class*="order-list-item"]{
+  position: relative;
+  padding: 0 30px 5px 20px;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  margin-bottom: 5px;
+}
+.td-list_flowers ul li[class*="order-list-item"]:first-child{
+  border-top: 1px solid rgba(0,0,0,.2);
+  padding-top: 5px;
+  margin-top: 5px;
+}
+.td-list_flowers ul li[class*="order-list-item"] span,
+.td-list_flowers ul li[class*="order-list-item"] b{
+  position: absolute;
+  top: calc(50% - 0.8em);
+  display: block;
+}
+.td-list_flowers ul li[class*="order-list-item"] span{
+  left: 0;
+  font-size: 12px;
+}
+.td-list_flowers ul li[class*="order-list-item"] b{
+  right: 0;
+  font-weight: bold;
+}
+
 th img.th-icon {
-  max-width: 50px;
+  max-width: 40px;
   height: auto;
   max-height: 50px;
   position: relative;
@@ -431,12 +473,12 @@ th.th-price_bank {
 }
 
 td.edit-order img.img-save {
-  width: 50px;
+  /*width: 50px;*/
 }
 
 td.edit-order img,
 td.remove-order img {
-  width: 35px;
+  width: 100%;
   cursor: pointer;
 }
 
@@ -453,6 +495,9 @@ td.td-date_departure img.send-img{
     margin: auto;
 }
 */
+td.td-date_departure{
+  min-width: 150px;
+}
 .tracking input#tracking_number{
   width: 80%;
   display: inline-block;
@@ -505,7 +550,7 @@ td.td-date_departure span.send-text {
   font-weight: 600;
   white-space: nowrap;
   position: relative;
-  top: 12px;
+  top: 14px;
   margin: auto;
   display: block;
   height: 0;
@@ -515,7 +560,7 @@ td.td-date_departure span.send-text {
 }
 
 td.td-price_bank img {
-  width: 65px;
+  width: 100%;
   position: absolute;
   left: 0;
   right: 0;
@@ -529,8 +574,8 @@ td.td-price_bank img {
 }
 
 #order-update-form .bank-logo {
-  height: 70px;
-  width: auto;
+  height: 40px;
+  width: 40px;
   display: block;
 }
 
@@ -559,7 +604,10 @@ td.td-price_bank img {
 .th-edit-order,
 .th-remove-order,
 .th-payment {
-  width: 60px;
+  /*width: 60px;*/
+}
+.th-remove-order .tooltiptext{
+  display: none;
 }
 
 /*tooltip*/

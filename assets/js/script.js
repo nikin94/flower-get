@@ -31,12 +31,10 @@ $('td.td-date_departure, td.date_payment').each(function () {/*Если даты
     }
 });
 
-
 $('#order-list td.remove-order').on('click', function () {/*confirm и удаление заказа*/
     var thisTR = $(this).parent();
     var thisID = thisTR.find("td:first-child").text();
-    var delete_result = confirm("Удалить заказ?");
-    if (delete_result) {
+    if (confirm("Удалить заказ?")) {
         $.get('order-remove.php?id=' + thisID).done(function () {
             thisTR.fadeOut(1000);
         });
@@ -95,7 +93,7 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
     }
 });
 $('body').on('focusout keyup', '#list_flowers', function () {/*Суммируем стоимости цветов из списка и выводим их в таблице*/
-    var current_values = ($('#list_flowers').val()).split(/,|;/);
+    var current_values = ($('#list_flowers').val()).replace(/-/g, ' ').split(/,|;/);/*замена дефисов на пробелы и разделение по , или ; */
     var prices = [];
     $('.order-add-list tbody tr').each(function () {
         $(this).remove();
@@ -265,17 +263,17 @@ $('body').on('click', '#order-list .td-date_departure .send-text, #order-list .t
     }
 });
 
-$('body').on('input','#tracking_number', function() {
+$('body').on('input','#tracking_number', function() {/*СОХРАНЯЕМ ТРЕК В БАЗУ ПОСЛЕ ВВОДА КАЖДОГО СИМВОЛА*/
     var _this = $(this).closest('td');
     var thisID = _this.closest('tr').find('td:first-child').text();
     $.post('order-update.php', {
         'id': thisID,
         'tracking_number': +$(this).val()
     }).done(function (result) {
-        console.log(result);
+        // console.log(result);
     });
 });
-$('body').on('click', '.tracking button.save', function () {
+$('body').on('click', '.tracking button.save', function () {/*ЗАМЕНА ИНПУТА С ТРЕКОМ НА КНОПКУ С ТЕКСТОМ*/
     var _this = $(this).closest('div.tracking');
     var thisID = _this.closest('tr').find('td:first-child').text();
     $.post('get-tracking-number.php',{
@@ -284,7 +282,7 @@ $('body').on('click', '.tracking button.save', function () {
         _this.html('<button class="tracking_number">'+result+'</button>');
     });
 });
-$('body').on('click', '.tracking_number', function () {
+$('body').on('click', '#order-list .tracking_number', function () {/*КОПИРОВАНИЕ ТРЕКА ПО КЛИКУ*/
     var _this = $(this);
     $(this).after('<input type="text" id="temp_input" value="'+_this.html()+'">');
     var copyText = document.getElementById("temp_input");
@@ -308,6 +306,19 @@ $('body').on('click', 'td.edit-order .img-edit', function () {/*КНОПКА Р�
         });
     }
 });
+$('body').on('click','#order-update-form .remove-order', function () {
+    var thisTR = $(this).parent();
+    var thisID = thisTR.find("td:first-child").text();
+    if (confirm("Удалить заказ?")) {
+        $.get('order-remove.php?id=' + thisID).done(function () {
+            thisTR.fadeOut(1000);
+            $('#order-list td.edit-order').each(function () {
+                $(this).addClass('edit');
+                $(this).find('img[src*="edit"]').removeClass('monochrome');
+            });
+        });
+    }
+});
 
 $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "СОХРАНИТЬ"*/
     var this_td = $(this).closest('td');
@@ -317,7 +328,7 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
     $.post('order-update.php', {
         'id': thisID,
         'name': this_tr.find('td.td-name input#name').val(),
-        'address': this_tr.find('td.td-address input#address').val(),
+        'address': this_tr.find('td.td-address #address').val(),
         'phone': this_tr.find('td.td-address input#phone').val(),
         'list_flowers': this_tr.find('td.td-list_flowers textarea#list_flowers').val(),
         'price_bank': this_tr.find('td.td-price_bank input[name="price_bank"]:checked').val(),
@@ -327,6 +338,7 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
         'payment_part': payment_part,
         'price_summary': +this_tr.find('td.td-price_summary input#price_summary').val()
     }).done(function (result) {
+        console.log(result);
         window.location.replace("/flowers/?list=" + thisID);
     });
 });

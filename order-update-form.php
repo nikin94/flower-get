@@ -13,8 +13,8 @@ $arrayData = $tmp[0];
     <td class="td-id"><?= $id ?></td>
     <td class="td-date_create"><?= convertDateFormat(htmlentities($arrayData['date_create'])) ?></td>
     <td class="td-name"><input id="name" autocomplete="off" value="<?= $arrayData['name'] ?>"></td>
-    <td class="td-address"><label>Адрес<input id="address" autocomplete="off"
-                                              value="<?= htmlentities($arrayData['address']) ?>"></label><br><?= "<label>Телефон<input id='phone' value='" . ($arrayData['phone'] != 0 && $arrayData['phone'] != -1 ? htmlentities($arrayData['phone']) : '') . "'></label>";
+    <td class="td-address"><label>Адрес<textarea id="address" autocomplete="off"
+                                              ><?= htmlentities($arrayData['address']) ?></textarea></label><br><?= "<label>Телефон<input id='phone' value='" . ($arrayData['phone'] != 0 && $arrayData['phone'] != -1 ? htmlentities($arrayData['phone']) : '') . "'></label>";
         ?></td>
     <td class="td-list_flowers"><textarea id="list_flowers"><?= htmlentities($arrayData['list_flowers']) ?></textarea>
     </td>

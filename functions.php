@@ -14,13 +14,26 @@ function convertDateFormat($datetime){/*дату вида (yyyy-mm-dd hh:mm:ss) 
     }
 }
 
-function printFlowersList($str){/*В список цветов вместо запятых вставляем переносы*/
+function printFlowersList($str){/*Вывод списка цветов в ячейке*/
+    $str = str_replace('-',' ',$str);
     $arrayFlowers = explode(',',$str);
-    foreach ($arrayFlowers as $item){
-        echo trim($item)."<br>";
+    foreach ($arrayFlowers as $key=>$string){
+        $string = explode(' ',$string);
+//        print_r($string);
+        foreach ($string as $item) {
+            $length = count($string)-1;
+            if($string[$length] == $item && is_numeric(intval($string[$length]))){
+                $string[$length] = '<b>'.strval(intval($string[$length])).'</b>';
+//                echo $string[$length]."\n";
+            }
+        }
+        $arrayFlowers[$key] = implode(' ', $string);
     }
-}
-
-function sortNormal($a,$b){
-
+    $i=1;
+    echo '<ul>';
+    foreach ($arrayFlowers as $key=>$item){
+        echo "<li class='order-list-item-$i'><span>$i</span><p>".trim($item)."</p></li>";
+        $i++;
+    }
+    echo '</ul>';
 }

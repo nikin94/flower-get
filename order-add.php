@@ -8,7 +8,10 @@ $sql = '';
 $arrayData['date_create'] = '\''.date("Y-m-d H:i").'\'';
 //print_r($_POST);
 foreach ($_POST as $key => $item) {/*переносим из POST в массив*/
-    $arrayData["$key"] = isset($_POST[$key]) ?  '\''.$_POST[$key].'\'' : '\'-1\'';
+    $arrayData["$key"] = isset($_POST[$key]) ?  '"'.str_replace('"',"'",$_POST["$key"]).'"' : '"-1"';
+    if(isset($_POST["bus_delivery"])){
+        $arrayData["price_delivery"] = '0';
+    }
     if(($key == 'bus_delivery' || $key == 'payment' || $key == 'departure') && isset($arrayData["$key"])) $arrayData["$key"] = true;
     if (mb_strpos($key, 'date_') === 0) {
         if($key == 'date_create'){
@@ -19,6 +22,9 @@ foreach ($_POST as $key => $item) {/*переносим из POST в масси�
             $arrayData["$key"] = str_replace('T',' ', $arrayData["$key"]);
         }
     }
+    if(isset($arrayData["list_flowers"])){
+        $arrayData["list_flowers"] = str_replace('-',' ',$arrayData["list_flowers"]);
+    }
 }
 foreach ($arrayData as $key=>$item){
     $namesSQL.=$key.', ';
@@ -28,5 +34,6 @@ foreach ($arrayData as $key=>$item){
 $namesSQL = rtrim(trim($namesSQL),",");
 $valuesSQL = rtrim(trim($valuesSQL),",");
 $sql = "insert into orders ($namesSQL) values ($valuesSQL)";
+//print_r($sql);
 $dbClass->queryUPDATE($sql);
 header("location: index.php?list=".mysqli_insert_id($dbClass->getDB()));

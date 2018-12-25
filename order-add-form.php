@@ -14,7 +14,7 @@
         </tr>
         <tr class="address">
             <td><label for="address">Адрес доставки</label></td>
-            <td><input name="address" id="address" autocomplete="off" type="text" required></td>
+            <td><textarea name="address" id="address" autocomplete="off" type="text" required></td>
         </tr>
         <tr class="phone">
             <td><label for="phone">Телефон</label></td>
@@ -27,10 +27,9 @@
         <tr class="price_bank">
             <td><label for="price_bank">Способ оплаты</label></td>
             <td>
-                <div class="bank-logo bank-tinkoff checked">
+                <div class="bank-logo bank-tinkoff">
                     <label>
-                        <input name="price_bank" class="radio-bank" value="tinkoff" id="price_bank_tinkoff" type="radio"
-                               checked>
+                        <input name="price_bank" class="radio-bank" value="tinkoff" id="price_bank_tinkoff" type="radio">
                         <img src="assets/img/icons/bank/tinkoff.png" alt="Tinkoff">
                     </label>
                 </div>
@@ -40,7 +39,7 @@
                         <img src="assets/img/icons/bank/rncb.jpg" alt="RNCB">
                     </label>
                 </div>
-                <div class="bank-logo bank-sberbank">
+                <div class="bank-logo bank-sberbank checked">
                     <label>
                         <input name="price_bank" class="radio-bank" value="sberbank" id="price_bank_sberbank"
                                type="radio">
