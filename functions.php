@@ -10,7 +10,7 @@ function convertDateFormat($datetime){/*дату вида (yyyy-mm-dd hh:mm:ss) 
         $timeH = explode(':', $time)[0];
         $timeM = explode(':', $time)[1];
         //$timeS = explode(':', $time)[2];
-        return $dateD . '-' . $dateM . '-' . $dateY . ' ' . $timeH . ':' . $timeM;
+        return $dateD . '-' . $dateM . '-' . $dateY . '<br>' . $timeH . ':' . $timeM;
     }
 }
 

@@ -127,7 +127,7 @@ $('body').on('focusout keyup', '#list_flowers', function () {/*Суммируе�
     calcPriceSummary();
 });
 
-$('body').on('focusin keyup','input#name', function () {/*ВЫВОДИМ ИМЕНА КЛИЕНТОВ ПО СОВПАДЕНИЮ В БАЗЕ*/
+$('body').on('focusin keyup','#name', function () {/*ВЫВОДИМ ИМЕНА КЛИЕНТОВ ПО СОВПАДЕНИЮ В БАЗЕ*/
     var _this = $(this);
     var nameValue = _this.val().toLowerCase();
     $('.names').html('');
@@ -164,13 +164,13 @@ $('body').on('click', '.names-item', function () {/*АВТОЗАПОЛНЕНИЕ
         currentName: currentName
     }).done(function (result) {
         result = JSON.parse(result);
-        $('input#name').val(currentName);
-        $('input#address').val(result['address']);
-        $('input#phone').val(result['phone']);
+        $('#name').val(currentName);
+        $('#address').val(result['address']);
+        $('#phone').val(result['phone']);
     });
 });
 
-$('body').on('focusout','input#name', function () {
+$('body').on('focusout','#name', function () {
     $('.names').slideUp(300, function () {
         $(this).html('');
     });
@@ -327,16 +327,16 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
     var payment_part = (this_tr.find('.td-payment img').hasClass('payment-img-part') ? 1 : 0) || (this_tr.find('#payment_part').hasClass('checked') ? 1 : 0);
     $.post('order-update.php', {
         'id': thisID,
-        'name': this_tr.find('td.td-name input#name').val(),
+        'name': this_tr.find('td.td-name #name').val(),
         'address': this_tr.find('td.td-address #address').val(),
-        'phone': this_tr.find('td.td-address input#phone').val(),
-        'list_flowers': this_tr.find('td.td-list_flowers textarea#list_flowers').val(),
+        'phone': this_tr.find('td.td-address #phone').val(),
+        'list_flowers': this_tr.find('td.td-list_flowers #list_flowers').val(),
         'price_bank': this_tr.find('td.td-price_bank input[name="price_bank"]:checked').val(),
-        'price_flowers': +this_tr.find('td.td-price_flowers input#price_flowers').val(),
-        'price_delivery': +this_tr.find('td.td-price_delivery input#price_delivery').val(),
-        'bus_delivery': this_tr.find('td.td-price_delivery input#bus_delivery').is(':checked') ? 1 : 0,
+        'price_flowers': +this_tr.find('td.td-price_flowers #price_flowers').val(),
+        'price_delivery': +this_tr.find('td.td-price_delivery #price_delivery').val(),
+        'bus_delivery': this_tr.find('td.td-price_delivery #bus_delivery').is(':checked') ? 1 : 0,
         'payment_part': payment_part,
-        'price_summary': +this_tr.find('td.td-price_summary input#price_summary').val()
+        'price_summary': +this_tr.find('td.td-price_summary #price_summary').val()
     }).done(function (result) {
         console.log(result);
         window.location.replace("/flowers/?list=" + thisID);

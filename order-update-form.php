@@ -12,7 +12,7 @@ $arrayData = $tmp[0];
 <tr id="order-update-form">
     <td class="td-id"><?= $id ?></td>
     <td class="td-date_create"><?= convertDateFormat(htmlentities($arrayData['date_create'])) ?></td>
-    <td class="td-name"><input id="name" autocomplete="off" value="<?= $arrayData['name'] ?>"></td>
+    <td class="td-name"><textarea id="name" autocomplete="off"><?= $arrayData['name'] ?></textarea></td>
     <td class="td-address"><label>Адрес<textarea id="address" autocomplete="off"
                                               ><?= htmlentities($arrayData['address']) ?></textarea></label><br><?= "<label>Телефон<input id='phone' value='" . ($arrayData['phone'] != 0 && $arrayData['phone'] != -1 ? htmlentities($arrayData['phone']) : '') . "'></label>";
         ?></td>

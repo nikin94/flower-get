@@ -403,7 +403,10 @@ header nav ul li a:hover {
   width: 290px;
   min-height: 150px;
 }
-
+#order-list .td-id{
+  font-weight: bold;
+  font-size: 20px;
+}
 .td-price_flowers input,
 .td-price_delivery input,
 .td-price_summary input {
@@ -417,7 +420,9 @@ header nav ul li a:hover {
   text-align: center;
 }
 #order-update-form .td-address input,
-#order-update-form .td-address textarea{
+#order-update-form .td-address textarea,
+#order-update-form .td-name input,
+#order-update-form .td-name textarea{
   max-width: 150px;
 
 }
@@ -589,7 +594,9 @@ td.td-price_bank img {
 .th-date_payment {
   width: 100px;
 }
-
+.td-date_create{
+  white-space: nowrap;
+}
 .th-date_departure {
   min-width: 140px;
   width: 140px;
@@ -606,7 +613,7 @@ td.td-price_bank img {
 .th-payment {
   /*width: 60px;*/
 }
-.th-remove-order .tooltiptext{
+#order-list thead tr th:last-child .tooltiptext{
   display: none;
 }
 
