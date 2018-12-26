@@ -16,8 +16,8 @@ $arrayData = $tmp[0];
     <td class="td-address"><label>Адрес<textarea id="address" autocomplete="off"
                                               ><?= htmlentities($arrayData['address']) ?></textarea></label><br><?= "<label>Телефон<input id='phone' value='" . ($arrayData['phone'] != 0 && $arrayData['phone'] != -1 ? htmlentities($arrayData['phone']) : '') . "'></label>";
         ?></td>
-    <td class="td-list_flowers"><textarea id="list_flowers"><?= htmlentities($arrayData['list_flowers']) ?></textarea>
-    </td>
+<!--    <td class="td-list_flowers"><textarea id="list_flowers">--><?//= htmlentities($arrayData['list_flowers']) ?><!--</textarea>-->
+    <td class="td-list_flowers"><?= printFlowersList(htmlentities($arrayData['list_flowers']),true) ?></td>
     <td class="td-price_bank">
         <div class="bank-logo <?= $arrayData['price_bank'] == 'tinkoff' ? 'checked' : '' ?>">
             <label><img src="assets/img/icons/bank/tinkoff.png" alt="tinkoff"><input type="radio" name="price_bank"

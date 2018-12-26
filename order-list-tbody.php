@@ -8,8 +8,8 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY departur
         <td class="td-id"><?= htmlentities($item['id']) ?></td>
         <td class="td-date_create"><?= convertDateFormat(htmlentities($item['date_create'])) ?></td>
         <td class="td-name"><?= htmlentities($item['name']) ?></td>
-        <td class="td-address"><?= htmlentities($item['address']) . (isset($item['phone']) && $item['phone'] != -1 ? ",<br>" . htmlentities($item['phone']) : '') ?></td>
-        <td class="td-list_flowers"><?= printFlowersList(htmlentities($item['list_flowers'])) ?></td>
+        <td class="td-address"><?= htmlentities($item['address']) . (isset($item['phone']) && $item['phone'] != -1 ? "<br>" . htmlentities($item['phone']) : '') ?></td>
+        <td class="td-list_flowers"><?= printFlowersList(htmlentities($item['list_flowers']),false) ?></td>
         <td class="td-price_bank"><?php
             switch ($item['price_bank']) {
                 case 'tinkoff':

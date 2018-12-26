@@ -14,7 +14,7 @@
         </tr>
         <tr class="address">
             <td><label for="address">Адрес доставки</label></td>
-            <td><textarea name="address" id="address" autocomplete="off" type="text" required></td>
+            <td><textarea name="address" id="address" autocomplete="off" type="text" required></textarea></td>
         </tr>
         <tr class="phone">
             <td><label for="phone">Телефон</label></td>

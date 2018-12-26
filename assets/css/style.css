@@ -17,21 +17,48 @@ body * {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+img{
+  max-width: 100%;
+  max-height: 100%;
+}
+td{
+  vertical-align: middle;
+}
 
 .inline-block {
   display: inline-block;
 }
-
+input,
+textarea{
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: #f3f5f5;
+}
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-header nav {
+header{
+  position: relative;
   height: 50px;
   background-color: rgba(255, 255, 255, .9);
   border-bottom: 1px solid rgba(0, 0, 0, .3);
+}
+header > *{
+  display: inline-block;
+  vertical-align: middle;
+}
+header nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 50px;
 }
 
 header nav ul {
@@ -60,12 +87,63 @@ header nav ul li a {
   -o-transition: all .4s ease;
   transition: all .4s ease;
 }
-
 header nav ul li a:hover {
   font-size: 19px;
   color: #000;
 }
-
+#header-search-form{
+  height: 50px;
+  float: right;
+  position: relative;
+  z-index: 1;
+  padding: 0 10px 0 5px;
+  background-color: rgba(0,0,0,.1);
+}
+#header-search-form .link{
+  display: block;
+  height: 50px;
+  margin-right: 5px;
+}
+#header-search-form .link img{
+  width: 40px;
+  margin-top: 5px;
+}
+#header-search-form input{
+  width: 200px;
+  height: 30px;
+  padding: 0 7px;
+}
+#header-search-form button{
+  height: 30px;
+  width: auto;
+  outline: none;
+  background-color: #a4c810;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,1);
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+}
+#header-search-form button:active{
+  background-color: #6ed05b5e;
+  -webkit-box-shadow:  0 0 1px 1px #fff;
+  -moz-box-shadow:  0 0 1px 1px #fff;
+  box-shadow:  0 0 1px 1px #fff;
+}
+.ok{
+  position: relative;
+  z-index: 1;
+  height: 50px;
+  float: right;
+  margin: 0 8px 0 0;
+}
+.ok img{
+  width: 40px;
+  margin-top: 5px;
+}
 #order-add {
   display: inline-block;
   vertical-align: middle;
@@ -206,13 +284,27 @@ header nav ul li a:hover {
   text-transform: uppercase;
 }
 
-#order-add input,
-#order-add textarea {
+#order-add textarea,
+#order-add input{
   width: 100%;
   padding: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+}
+
+#order-add input[type="text"],
+#order-add input[type="number"]
+#order-add textarea{
+  display: inline-block;
+  max-width: 330px;
+  min-width: 330px;
+  float: left;
+}
+#order-add textarea{
+  min-height: 50px;
+  max-width: 330px;
+  min-width: 330px;
 }
 
 #order-add textarea#list_flowers {
@@ -337,6 +429,7 @@ header nav ul li a:hover {
 .payment-img,
 .bus-img {
   width: 100%;
+  max-width: 60px;
   position: absolute;
   left: 0;
   right: 0;
@@ -363,7 +456,8 @@ header nav ul li a:hover {
 #order-list td,
 #order-list th {
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  border-bottom: 1px solid rgba(0, 0, 0, .3);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
   padding: 5px;
   vertical-align: middle;
 }
@@ -464,7 +558,9 @@ header nav ul li a:hover {
   right: 0;
   font-weight: bold;
 }
-
+#order-update-form .td-list_flowers ul li[class*="order-list-item"]{
+  padding-right: 0;
+}
 th img.th-icon {
   max-width: 40px;
   height: auto;
@@ -483,6 +579,7 @@ td.edit-order img.img-save {
 
 td.edit-order img,
 td.remove-order img {
+  max-width: 40px;
   width: 100%;
   cursor: pointer;
 }
@@ -566,6 +663,7 @@ td.td-date_departure span.send-text {
 
 td.td-price_bank img {
   width: 100%;
+  max-width: 70px;
   position: absolute;
   left: 0;
   right: 0;
@@ -583,7 +681,25 @@ td.td-price_bank img {
   width: 40px;
   display: block;
 }
-
+#order-update-form .td-list_flowers{
+  min-width: 300px;
+}
+#order-update-form .td-list_flowers .flowers-list-input-name{/*textarea*/
+  min-width: 220px;
+  max-width: 220px;
+  min-height: 40px;
+  display: inline-block;
+  vertical-align: middle;
+}
+#order-update-form .td-list_flowers .flowers-list-input-price{/*input*/
+  display: inline-block;
+  width: 40px;
+  padding: 5px 0;
+  text-align: center;
+  vertical-align: middle;
+  margin-left: 5px;
+  height: 40px;
+}
 .th-name,
 .th-address,
 .th-phone {
@@ -592,10 +708,13 @@ td.td-price_bank img {
 
 .th-date_create,
 .th-date_payment {
-  width: 100px;
+  width: auto;
 }
 .td-date_create{
   white-space: nowrap;
+}
+.td-date_create b{
+  font-weight: bold;
 }
 .th-date_departure {
   min-width: 140px;
@@ -659,7 +778,7 @@ td.td-price_bank img {
 }
 
 #order-update-form input {
-  display: table-cell;
+  /*display: table-cell;*/
 }
 
 .monochrome {
