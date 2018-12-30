@@ -4,7 +4,7 @@ require_once('assets/DB/DataBaseConnection.php');
 $arrayData = [];
 $sql = '';
 $id = +$_POST['id'];
-//print_r($_POST);
+print_r($_POST);
 /*
 $_POST = [
     'id'=> 2,

@@ -79,11 +79,20 @@ function printFlowersList($str, $is_updateForm = 0)
     echo '<ul>';
     foreach ($arrayFlowers as $key => $item) {
         if(!$is_updateForm){
-            echo "<li class='order-list-item-$i'><span>$i</span><p>" . trim($item) . "</p></li>";
+            echo "<li class='order-list-item-$i order-list-item'><span>$i</span><p>" . trim($item) . "</p></li>";
         }else{
-            echo "<li class='order-list-item-$i'><span>$i</span><textarea class='flowers-list-input-name' id='name-input-".$i."'>".trim($item)."</textarea><input type='number' class='flowers-list-input-price' id='price-input-".$i."' value='".$prices[$i-1]."'></li>";
+            echo printOrderListItem($i,$item,$prices);
         }
         $i++;
     }
     echo '</ul>';
+    echo $is_updateForm ? '<div class="add-item">Добавить растение</div>':'';
+}
+function printOrderListItem($i,$item='',$prices=0){
+    return "<li class='order-list-item'>
+                <span>$i</span>
+                <textarea class='flowers-list-input-name'>".trim($item)."</textarea>
+                <input type='number' class='flowers-list-input-price' value='".$prices[$i-1]."'>
+                <div class='delete-item'></div>
+            </li>";
 }

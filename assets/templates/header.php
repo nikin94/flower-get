@@ -9,11 +9,11 @@
         <table>
             <tr>
                 <td>
-                    <a class="link" href="http://www.google.ru/" target="_blank">
+                    <a class="link" href="http://www.google.com/" target="_blank">
                         <img src="assets/img/icons/google.png" alt="Google"></a>
                 </td>
                 <td>
-                    <input type="text" name="search" id="search" maxlength=255 value="">
+                    <input type="text" name="q" id="q" maxlength=255 value="">
                     <button>Искать</button>
                 </td>
             </tr>

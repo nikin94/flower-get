@@ -8,11 +8,22 @@ function getUrlParameter(sParam) {/*Вернёт значение из get-за�
         }
     }
 }
-
-function calcPriceSummary() {/*Ставим итоговую стоимость*/
-    $('input#price_summary').val(+$('input#price_flowers').val() + +$('input#price_delivery').val());
+function calcAllprices() {/*Перерасчет общей стоимости при изменении цены цветка*/
+    var summ = 0;
+    $('.flowers-list-input-price').each(function () {
+        summ += +$(this).val();
+    });
+    $('#price_flowers').val(summ);
+    calcPriceSummary();
 }
-
+function calcPriceSummary() {/*Ставим итоговую стоимость */
+    $('#price_summary').val(+$('#price_flowers').val() + +$('#price_delivery').val());
+}
+function rewriteIndexes() {
+    $('#order-update-form .order-list-item span').each(function (index) {
+        $(this).html(+index+1);
+    });
+}
 if (getUrlParameter('list') !== true) {/*Отмечаем затухающим зеленым цветом отредактированную строку и сносим _GET в url*/
     $('#order-list .td-id').each(function () {
         if ($(this).text() == getUrlParameter("list")) {
@@ -48,16 +59,16 @@ $('body').on('click', '.bank-logo, .bank-logo-update', function () {/*Выбор
 });
 
 $('body').on('click', 'input#bus_delivery', function (){/*Отправка автобусом*/
-    var price_delivery = $('input#price_delivery');
+    var price_delivery = $('#price_delivery');
     if(this.checked){
         price_delivery.attr('disabled', true);
         price_delivery.val(0);
-        $('input#price_summary').val(+$('input#price_flowers').val());
+        $('#price_summary').val(+$('#price_flowers').val());
         $(this).next().attr('src','assets/img/icons/bus.png');
     }else {
         price_delivery.attr('disabled', false);
         price_delivery.val(350);
-        $('input#price_summary').val(+$('input#price_flowers').val()+350);
+        $('#price_summary').val(+$('#price_flowers').val()+350);
         $(this).next().attr('src','assets/img/icons/bus_no.png');
     }
 });
@@ -91,6 +102,33 @@ $('#order-add table tr td #payment, #order-add table tr td #departure').click(fu
             });
         }
     }
+});
+$('body').on('input','.flowers-list-input-price', calcAllprices);
+
+$('body').on('click','.delete-item',function () {/*Удаление элемента из списка update-формы*/
+    var _this = $(this).closest('li');
+    var number = _this.find('span').html();
+    var name = _this.find('textarea');
+    var price = _this.find('input');
+    if(confirm('Удалить пункт №'+number+' - \''+name.val()+'\', стоимостью '+price.val()+'?')){
+        _this.fadeOut(300, function () {
+            name.val('');
+            price.val('');
+            $(this).remove();
+            calcAllprices();
+            rewriteIndexes();
+        });
+    }
+});
+
+$('body').on('click','#order-update-form .add-item', function () {/*ДОБАВИТЬ РАСТЕНИЕ*/
+    $(this).closest('td').children('ul').append("<li class='order-list-item'>" +
+        "<span></span>" +
+        "<textarea class='flowers-list-input-name'></textarea>" +
+        "<input type='number' class='flowers-list-input-price'>" +
+        "<div class='delete-item'></div>" +
+        "</li>");
+    rewriteIndexes();
 });
 $('body').on('focusout keyup', '#list_flowers', function () {/*Суммируем стоимости цветов из списка и выводим их в таблице*/
     var current_values = ($('#list_flowers').val()).replace(/-/g, ' ').split(/,|;/);/*замена дефисов на пробелы и разделение по , или ; */
@@ -176,7 +214,7 @@ $('body').on('focusout','#name', function () {
     });
 });
 
-$('body').on('keyup', 'input#price_flowers, input#price_delivery', calcPriceSummary);
+$('body').on('keyup', '#price_flowers, #price_delivery', calcPriceSummary);
 
 $('body').on('click', '#order-list img.payment-img', function () {/*КНОПКА ОПЛАТЫ*/
     var _this = $(this).closest('td.td-payment');
@@ -325,12 +363,23 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
     var this_tr = $(this).closest('tr');
     var thisID = this_tr.find('td:first-child').text();
     var payment_part = (this_tr.find('.td-payment img').hasClass('payment-img-part') ? 1 : 0) || (this_tr.find('#payment_part').hasClass('checked') ? 1 : 0);
+    var list_inputs = $('#order-update-form .order-list-item .flowers-list-input-name, ' +
+                        '#order-update-form .order-list-item .flowers-list-input-price').toArray();
+    var list_flowers = '';
+    for (var i in list_inputs){
+        if($(list_inputs[i]).val()){
+            list_flowers += ' '+$(list_inputs[i]).val();
+            if(i%2 && (+i+1) != list_inputs.length){
+                list_flowers+=',';
+            }
+        }
+    }
     $.post('order-update.php', {
         'id': thisID,
         'name': this_tr.find('td.td-name #name').val(),
         'address': this_tr.find('td.td-address #address').val(),
         'phone': this_tr.find('td.td-address #phone').val(),
-        'list_flowers': this_tr.find('td.td-list_flowers #list_flowers').val(),
+        'list_flowers': list_flowers,
         'price_bank': this_tr.find('td.td-price_bank input[name="price_bank"]:checked').val(),
         'price_flowers': +this_tr.find('td.td-price_flowers #price_flowers').val(),
         'price_delivery': +this_tr.find('td.td-price_delivery #price_delivery').val(),
@@ -338,7 +387,7 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
         'payment_part': payment_part,
         'price_summary': +this_tr.find('td.td-price_summary #price_summary').val()
     }).done(function (result) {
-        console.log(result);
+        // console.log(result);
         window.location.replace("/flowers/?list=" + thisID);
     });
 });

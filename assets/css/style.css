@@ -17,40 +17,47 @@ body * {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-img{
+
+img {
   max-width: 100%;
   max-height: 100%;
 }
-td{
+
+td, th {
   vertical-align: middle;
 }
 
 .inline-block {
   display: inline-block;
 }
+
 input,
-textarea{
+textarea {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   border: 1px solid lightgray;
   background-color: #f3f5f5;
 }
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-header{
+
+header {
   position: relative;
   height: 50px;
   background-color: rgba(255, 255, 255, .9);
   border-bottom: 1px solid rgba(0, 0, 0, .3);
 }
-header > *{
+
+header > * {
   display: inline-block;
   vertical-align: middle;
 }
+
 header nav {
   position: absolute;
   left: 0;
@@ -87,33 +94,39 @@ header nav ul li a {
   -o-transition: all .4s ease;
   transition: all .4s ease;
 }
+
 header nav ul li a:hover {
   font-size: 19px;
   color: #000;
 }
-#header-search-form{
+
+#header-search-form {
   height: 50px;
   float: right;
   position: relative;
   z-index: 1;
   padding: 0 10px 0 5px;
-  background-color: rgba(0,0,0,.1);
+  background-color: rgba(0, 0, 0, .1);
 }
-#header-search-form .link{
+
+#header-search-form .link {
   display: block;
   height: 50px;
   margin-right: 5px;
 }
-#header-search-form .link img{
+
+#header-search-form .link img {
   width: 40px;
   margin-top: 5px;
 }
-#header-search-form input{
+
+#header-search-form input {
   width: 200px;
   height: 30px;
   padding: 0 7px;
 }
-#header-search-form button{
+
+#header-search-form button {
   height: 30px;
   width: auto;
   outline: none;
@@ -122,28 +135,32 @@ header nav ul li a:hover {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  border: 1px solid rgba(255,255,255,1);
+  border: 1px solid rgba(255, 255, 255, 1);
   text-transform: uppercase;
   font-weight: bold;
   color: #fff;
 }
-#header-search-form button:active{
+
+#header-search-form button:active {
   background-color: #6ed05b5e;
-  -webkit-box-shadow:  0 0 1px 1px #fff;
-  -moz-box-shadow:  0 0 1px 1px #fff;
-  box-shadow:  0 0 1px 1px #fff;
+  -webkit-box-shadow: 0 0 1px 1px #fff;
+  -moz-box-shadow: 0 0 1px 1px #fff;
+  box-shadow: 0 0 1px 1px #fff;
 }
-.ok{
+
+.ok {
   position: relative;
   z-index: 1;
   height: 50px;
   float: right;
   margin: 0 8px 0 0;
 }
-.ok img{
+
+.ok img {
   width: 40px;
   margin-top: 5px;
 }
+
 #order-add {
   display: inline-block;
   vertical-align: middle;
@@ -285,7 +302,7 @@ header nav ul li a:hover {
 }
 
 #order-add textarea,
-#order-add input{
+#order-add input {
   width: 100%;
   padding: 5px;
   -webkit-border-radius: 5px;
@@ -295,13 +312,14 @@ header nav ul li a:hover {
 
 #order-add input[type="text"],
 #order-add input[type="number"]
-#order-add textarea{
+#order-add textarea {
   display: inline-block;
   max-width: 330px;
   min-width: 330px;
   float: left;
 }
-#order-add textarea{
+
+#order-add textarea {
   min-height: 50px;
   max-width: 330px;
   min-width: 330px;
@@ -351,16 +369,19 @@ header nav ul li a:hover {
   position: relative;
   cursor: pointer;
 }
-#order-add .bus-icon{
+
+#order-add .bus-icon {
   width: 70px;
 }
-#order-update-form .bus-icon{
+
+#order-update-form .bus-icon {
   width: 100%;
 }
 
 #order-add .bus-icon img,
 #order-update-form .bus-icon img {
   width: 100%;
+  max-height: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -459,7 +480,6 @@ header nav ul li a:hover {
   border-bottom: 1px solid rgba(0, 0, 0, .3);
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   padding: 5px;
-  vertical-align: middle;
 }
 
 #order-list thead tr:first-child {
@@ -497,15 +517,18 @@ header nav ul li a:hover {
   width: 290px;
   min-height: 150px;
 }
-#order-list .td-id{
+
+#order-list .td-id {
   font-weight: bold;
   font-size: 20px;
 }
+
 .td-price_flowers input,
 .td-price_delivery input,
 .td-price_summary input {
   width: 75px;
 }
+
 #order-update-form .td-price_flowers input,
 #order-update-form .td-price_delivery input,
 #order-update-form .td-price_summary input {
@@ -513,13 +536,20 @@ header nav ul li a:hover {
   padding: 5px 0;
   text-align: center;
 }
-#order-update-form .td-address input,
-#order-update-form .td-address textarea,
-#order-update-form .td-name input,
-#order-update-form .td-name textarea{
-  max-width: 150px;
 
+#order-update-form .td-address input,
+#order-update-form .td-name input,
+#order-update-form .td-address textarea,
+#order-update-form .td-name textarea {
+  max-width: 150px;
 }
+
+#order-update-form .td-address textarea,
+#order-update-form .td-name textarea {
+  min-width: 150px;
+  min-height: 40px;
+}
+
 .td-price_flowers {
   font-weight: 600;
   font-size: 18px;
@@ -533,33 +563,96 @@ header nav ul li a:hover {
   width: 300px;
 }
 
-.td-list_flowers ul li[class*="order-list-item"]{
+.td-list_flowers ul .order-list-item {
   position: relative;
   padding: 0 30px 5px 20px;
-  border-bottom: 1px solid rgba(0,0,0,.2);
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
   margin-bottom: 5px;
+  min-height: 26px;
 }
-.td-list_flowers ul li[class*="order-list-item"]:first-child{
-  border-top: 1px solid rgba(0,0,0,.2);
+
+.td-list_flowers ul .order-list-item:first-child {
+  border-top: 1px solid rgba(0, 0, 0, .2);
   padding-top: 5px;
   margin-top: 5px;
 }
-.td-list_flowers ul li[class*="order-list-item"] span,
-.td-list_flowers ul li[class*="order-list-item"] b{
+
+.td-list_flowers ul .order-list-item span,
+.td-list_flowers ul .order-list-item b {
   position: absolute;
-  top: calc(50% - 0.8em);
+  top: calc(50% - 0.625em);
   display: block;
 }
-.td-list_flowers ul li[class*="order-list-item"] span{
+
+.td-list_flowers ul .order-list-item span {
   left: 0;
   font-size: 12px;
 }
-.td-list_flowers ul li[class*="order-list-item"] b{
+
+.td-list_flowers ul .order-list-item b {
   right: 0;
   font-weight: bold;
 }
-#order-update-form .td-list_flowers ul li[class*="order-list-item"]{
-  padding-right: 0;
+#order-update-form .td-list_flowers ul .order-list-item{
+  padding-right: 20px;
+}
+#order-update-form .td-list_flowers ul .order-list-item .delete-item{
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 5px;
+  margin: auto;
+  width: 15px;
+  height: 15px;
+  background: url("../img/icons/delete.png") no-repeat center;
+  -webkit-background-size: contain;
+  background-size: contain;
+  cursor: pointer;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+}
+#order-update-form .td-list_flowers ul .order-list-item .delete-item:hover{
+  background-color: rgba(0,0,0,0.2);
+  box-shadow: 0 0 7px 4px rgba(0,0,0,0.2);
+}
+
+#order-update-form .td-list_flowers .add-item{
+  text-align: left;
+  padding: 5px 30px;
+  border: 1px solid lightgray;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  font-weight: bold;
+  font-size: 15px;
+  width: 200px;
+  margin-left: 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+#order-update-form .td-list_flowers .add-item:before,
+#order-update-form .td-list_flowers .add-item:after{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 15px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: url("../img/icons/plus.png") no-repeat center;
+  -webkit-background-size: contain;
+  background-size: contain;
+}
+#order-update-form .td-list_flowers .add-item:before{
+  left: 8px;
+}
+#order-update-form .td-list_flowers .add-item:after{
+  right: 8px;
 }
 th img.th-icon {
   max-width: 40px;
@@ -597,10 +690,11 @@ td.td-date_departure img.send-img{
     margin: auto;
 }
 */
-td.td-date_departure{
+td.td-date_departure {
   min-width: 150px;
 }
-.tracking input#tracking_number{
+
+.tracking input#tracking_number {
   width: 80%;
   display: inline-block;
   font-size: 13px;
@@ -608,7 +702,8 @@ td.td-date_departure{
   padding: 3px;
   height: 25px;
 }
-.tracking button.save{
+
+.tracking button.save {
   width: 20%;
   text-indent: -9999px;
   display: inline-block;
@@ -620,7 +715,8 @@ td.td-date_departure{
   background-color: transparent;
   outline: none;
 }
-.tracking button.save:after{
+
+.tracking button.save:after {
   content: '';
   display: block;
   position: absolute;
@@ -634,12 +730,14 @@ td.td-date_departure{
   bottom: 0;
   margin: auto;
 }
-.tracking_number{
+
+.tracking_number {
   font-weight: bold;
   font-size: 14px;
   margin-top: 5px;
   cursor: copy;
 }
+
 td.td-date_departure img.send-img {
   max-width: 100%;
   max-height: 50px;
@@ -681,17 +779,21 @@ td.td-price_bank img {
   width: 40px;
   display: block;
 }
-#order-update-form .td-list_flowers{
+
+#order-update-form .td-list_flowers {
   min-width: 300px;
+  text-align: left;
 }
-#order-update-form .td-list_flowers .flowers-list-input-name{/*textarea*/
-  min-width: 220px;
-  max-width: 220px;
+
+#order-update-form .td-list_flowers .flowers-list-input-name { /*textarea*/
+  min-width: 200px;
+  max-width: 200px;
   min-height: 40px;
   display: inline-block;
   vertical-align: middle;
 }
-#order-update-form .td-list_flowers .flowers-list-input-price{/*input*/
+
+#order-update-form .td-list_flowers .flowers-list-input-price { /*input*/
   display: inline-block;
   width: 40px;
   padding: 5px 0;
@@ -700,6 +802,7 @@ td.td-price_bank img {
   margin-left: 5px;
   height: 40px;
 }
+
 .th-name,
 .th-address,
 .th-phone {
@@ -710,12 +813,15 @@ td.td-price_bank img {
 .th-date_payment {
   width: auto;
 }
-.td-date_create{
+
+.td-date_create {
   white-space: nowrap;
 }
-.td-date_create b{
+
+.td-date_create b {
   font-weight: bold;
 }
+
 .th-date_departure {
   min-width: 140px;
   width: 140px;
@@ -732,7 +838,8 @@ td.td-price_bank img {
 .th-payment {
   /*width: 60px;*/
 }
-#order-list thead tr th:last-child .tooltiptext{
+
+#order-list thead tr th:last-child .tooltiptext {
   display: none;
 }
 
