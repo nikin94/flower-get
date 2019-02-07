@@ -76,7 +76,7 @@ function printFlowersList($str, $is_updateForm = 0)
         $arrayFlowers[$key] = implode(' ', $string);
     }
     $i = 1;
-    echo '<ul>';
+    echo '<ul '.(!$is_updateForm?'class = "packed"':'').'>';
     foreach ($arrayFlowers as $key => $item) {
         if(!$is_updateForm){
             echo "<li class='order-list-item-$i order-list-item'><span>$i</span><p>" . trim($item) . "</p></li>";
@@ -95,4 +95,7 @@ function printOrderListItem($i,$item='',$prices=0){
                 <input type='number' class='flowers-list-input-price' value='".$prices[$i-1]."'>
                 <div class='delete-item'></div>
             </li>";
+}
+function printName($value){
+  return str_replace(' ', '<br>', htmlentities($value));
 }

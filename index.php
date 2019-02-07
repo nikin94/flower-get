@@ -21,7 +21,7 @@ if (isset($_GET['list'])){/*$_SERVER['REQUEST_URI']*/
 <script>
     //console.log(<?= json_encode(mysqli_error($dbClass->getDB())); ?>);
 </script>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="assets/js/jquery-3.3.1.min.js"></script>
 <script src="assets/js/jquery-animate-colors.js"></script>
 <script src="assets/js/script.js"></script>
 </body>

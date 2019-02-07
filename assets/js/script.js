@@ -39,6 +39,25 @@ if (getUrlParameter('list') !== true) {/*Отмечаем затухающим �
     }
   });
 }
+$('#order-list .td-list_flowers ul').each(function () {
+  if($(this).height() < 200 ){
+    if($(this).hasClass('packed')){
+      $(this).removeClass('packed');
+    }
+  }else {
+    $(this).parent().prepend('<div class="pack" title="Развернуть"></div>');
+  }
+});
+
+$('body').on('click', '.pack', function () {
+  if($(this).next().hasClass('packed')){
+    $(this).next().removeClass('packed');
+    $(this).attr('title','Свернуть');
+  }else{
+    $(this).next().addClass('packed');
+    $(this).attr('title','Развернуть');
+  }
+});
 
 $('td.td-date_departure, td.date_payment').each(function () {/*Если даты нет - не выводим*/
   if ($(this).text() === '00-00-0000 00:00') {
@@ -378,6 +397,7 @@ $('body').on('click', 'td.edit-order .img-save', function () {/*КНОПКА "С
     }
   }
   if(list_flowers.length > 1) list_flowers = list_flowers.slice(0, -1);
+  calcAllprices();
   $.post('order-update.php', {
     'id': thisID,
     'name': this_tr.find('td.td-name #name').val(),

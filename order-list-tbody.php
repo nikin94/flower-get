@@ -7,7 +7,7 @@ $arrayListOrders = $dbClass->querySELECT("select * from orders ORDER BY departur
     <tr class="<?= 'id-' . htmlentities($item['id']) ?>">
         <td class="td-id"><?= htmlentities($item['id']) ?></td>
         <td class="td-date_create"><?= convertDateFormat(htmlentities($item['date_create'])) ?></td>
-        <td class="td-name"><?= htmlentities($item['name']) ?></td>
+        <td class="td-name"><?= printName($item['name']) ?></td>
         <td class="td-address"><?= htmlentities($item['address']) . (isset($item['phone']) && $item['phone'] != -1 ? "<br>" . htmlentities($item['phone']) : '') ?></td>
         <td class="td-list_flowers"><?= printFlowersList(htmlentities($item['list_flowers']),false) ?></td>
         <td class="td-price_bank"><?php

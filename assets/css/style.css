@@ -562,6 +562,58 @@ header nav ul li a:hover {
 .th-list_flowers {
   width: 300px;
 }
+.td-list_flowers{
+  /*background-color: #a4c810;*/
+}
+.td-name{
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.pack{
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 100%;
+  right: -20px;
+  top: 0;
+}
+.pack:before,
+.pack:after{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 40px;
+  z-index: 1;
+  cursor: pointer;
+  background: #a4c810ad url("../img/icons/arrows.svg") no-repeat center;
+  -webkit-background-size: contain;
+  background-size: contain;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.pack:before{
+  top: 10px;
+}
+.pack:after{
+  bottom: 10px;
+}
+.td-list_flowers ul.packed{
+  padding-right: 5px;
+  overflow-y: auto;
+  max-height: 200px;
+}
+.td-list_flowers ul::-webkit-scrollbar {
+  width: 12px;
+}
+.td-list_flowers ul::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+}
+.td-list_flowers ul::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 12px #a4c810;
+}
 
 .td-list_flowers ul .order-list-item {
   position: relative;
@@ -572,9 +624,13 @@ header nav ul li a:hover {
 }
 
 .td-list_flowers ul .order-list-item:first-child {
-  border-top: 1px solid rgba(0, 0, 0, .2);
+  /*border-top: 1px solid rgba(0, 0, 0, .2);*/
   padding-top: 5px;
-  margin-top: 5px;
+  /*margin-top: 5px;*/
+}
+.td-list_flowers ul .order-list-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .td-list_flowers ul .order-list-item span,
@@ -778,6 +834,7 @@ td.td-price_bank img {
   height: 40px;
   width: 40px;
   display: block;
+  margin: 0 auto;
 }
 
 #order-update-form .td-list_flowers {
